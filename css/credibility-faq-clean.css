@@ -1,0 +1,156 @@
+/* =====================================================
+   CREDIBILITY & FAQ SECTIONS - CLEANER DESIGN
+   ===================================================== */
+
+/* ===== Credibility Section ===== */
+.credibility-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--color-dark-secondary);
+}
+
+/* Cleaner Cards Grid */
+.credibility-cards-clean {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-xxl);
+}
+
+.credibility-card-clean {
+    background: var(--color-dark-card);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    transition: all var(--transition-normal);
+}
+
+.credibility-card-clean:hover {
+    border-color: var(--color-orange);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(245, 166, 35, 0.2);
+}
+
+.credibility-icon-clean {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--color-orange), var(--color-gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    font-size: 2rem;
+    color: var(--color-dark-primary);
+    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.3);
+}
+
+.credibility-card-clean h3 {
+    font-size: 1.3rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.credibility-card-clean p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* No Fake Testimonials Section */
+.no-fake-testimonials {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    background: rgba(245, 166, 35, 0.05);
+    border: 2px solid rgba(245, 166, 35, 0.2);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.testimonial-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: linear-gradient(135deg, var(--color-orange), var(--color-gold));
+    color: var(--color-dark-primary);
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 4px 16px rgba(245, 166, 35, 0.4);
+}
+
+.testimonial-badge i {
+    font-size: 1.2rem;
+}
+
+.no-fake-testimonials p {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ===== FAQ Section ===== */
+.faq-section-clean {
+    padding: var(--spacing-xxl) 0;
+    background: var(--color-dark-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .credibility-cards-clean {
+        gap: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    .credibility-cards-clean {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .credibility-card-clean {
+        padding: var(--spacing-lg);
+    }
+    
+    .credibility-icon-clean {
+        width: 60px;
+        height: 60px;
+        font-size: 1.75rem;
+    }
+    
+    .credibility-card-clean h3 {
+        font-size: 1.2rem;
+    }
+    
+    .no-fake-testimonials {
+        padding: var(--spacing-md);
+    }
+    
+    .testimonial-badge {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .credibility-icon-clean {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .credibility-card-clean h3 {
+        font-size: 1.1rem;
+    }
+    
+    .credibility-card-clean p,
+    .no-fake-testimonials p {
+        font-size: 0.9rem;
+    }
+}

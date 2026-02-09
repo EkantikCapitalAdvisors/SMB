@@ -1,0 +1,282 @@
+/* =====================================================
+   ROADMAP TIMELINE - CARD-BASED QUARTERLY PHASES
+   ===================================================== */
+
+.roadmap-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--color-dark-secondary);
+}
+
+/* New Timeline Layout */
+.roadmap-timeline-new {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+    position: relative;
+}
+
+/* Connecting Line (Desktop) */
+.roadmap-timeline-new::before {
+    content: '';
+    position: absolute;
+    left: 60px;
+    top: 80px;
+    bottom: 80px;
+    width: 3px;
+    background: linear-gradient(180deg, 
+        var(--color-orange) 0%, 
+        var(--color-gold) 25%,
+        var(--color-orange) 50%,
+        var(--color-gold) 75%,
+        var(--color-orange) 100%
+    );
+    opacity: 0.3;
+}
+
+/* Phase Card */
+.timeline-phase-card {
+    background: var(--color-dark-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.timeline-phase-card:hover {
+    border-color: var(--color-orange);
+    transform: translateX(8px);
+    box-shadow: 0 12px 40px rgba(245, 166, 35, 0.25);
+}
+
+/* Phase Header */
+.phase-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: rgba(245, 166, 35, 0.05);
+    border-bottom: 1px solid rgba(245, 166, 35, 0.1);
+}
+
+/* Phase Badge */
+.phase-badge {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-orange), var(--color-gold));
+    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.4);
+    position: relative;
+    z-index: 2;
+}
+
+.phase-badge::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-orange), var(--color-gold));
+    opacity: 0.3;
+    filter: blur(8px);
+    z-index: -1;
+}
+
+.phase-number {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-dark-primary);
+    line-height: 1;
+}
+
+.phase-months {
+    font-size: 0.75rem;
+    color: var(--color-dark-primary);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Phase Badge Color Variants */
+.phase-badge-1 {
+    background: linear-gradient(135deg, #F5A623, #F4B223);
+}
+
+.phase-badge-2 {
+    background: linear-gradient(135deg, #F4B223, #FFD700);
+}
+
+.phase-badge-3 {
+    background: linear-gradient(135deg, #FFD700, #F5A623);
+}
+
+.phase-badge-4 {
+    background: linear-gradient(135deg, #F5A623, #FF8C00);
+}
+
+/* Phase Title */
+.phase-title {
+    flex: 1;
+}
+
+.phase-title h3 {
+    font-size: 1.75rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-bold);
+}
+
+.phase-subtitle {
+    font-size: 1rem;
+    color: var(--color-orange);
+    font-style: italic;
+    margin: 0;
+}
+
+/* Phase Body */
+.phase-body {
+    padding: var(--spacing-lg);
+}
+
+/* Deliverables Grid */
+.deliverables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Deliverable Card */
+.deliverable-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(245, 166, 35, 0.1);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    transition: all var(--transition-normal);
+}
+
+.deliverable-card:hover {
+    background: rgba(245, 166, 35, 0.05);
+    border-color: rgba(245, 166, 35, 0.3);
+    transform: translateY(-4px);
+}
+
+.deliverable-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--color-orange), var(--color-gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.25rem;
+    color: var(--color-dark-primary);
+}
+
+.deliverable-card h4 {
+    font-size: 1.1rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-semibold);
+}
+
+.deliverable-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Phase Footer */
+.phase-footer {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: rgba(245, 166, 35, 0.08);
+    border-top: 1px solid rgba(245, 166, 35, 0.15);
+}
+
+.phase-outcome {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 1rem;
+    color: var(--color-gold);
+    font-weight: var(--font-weight-semibold);
+}
+
+.phase-outcome i {
+    font-size: 1.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .roadmap-timeline-new::before {
+        left: 50px;
+    }
+    
+    .deliverables-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .roadmap-timeline-new::before {
+        display: none;
+    }
+    
+    .timeline-phase-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .phase-header {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--spacing-md);
+    }
+    
+    .phase-badge {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .phase-number {
+        font-size: 1.5rem;
+    }
+    
+    .phase-title h3 {
+        font-size: 1.5rem;
+    }
+    
+    .deliverables-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .phase-badge {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .phase-number {
+        font-size: 1.25rem;
+    }
+    
+    .phase-months {
+        font-size: 0.7rem;
+    }
+    
+    .phase-title h3 {
+        font-size: 1.25rem;
+    }
+    
+    .deliverable-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}

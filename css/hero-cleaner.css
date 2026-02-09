@@ -1,0 +1,125 @@
+/* =====================================================
+   HERO SECTION - CLEANER DESIGN
+   ===================================================== */
+
+/* Hero Description */
+.hero-description {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-xl);
+    max-width: 900px;
+}
+
+/* Hero Levers List - Cleaner Card Style */
+.hero-levers-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.hero-lever-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal);
+}
+
+.hero-lever-item:hover {
+    border-color: var(--color-orange);
+    background: rgba(245, 166, 35, 0.05);
+    transform: translateX(4px);
+}
+
+.hero-lever-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--color-orange), var(--color-gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-dark-primary);
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
+.hero-lever-content {
+    flex: 1;
+}
+
+.hero-lever-content h3 {
+    font-size: 1.1rem;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 4px;
+}
+
+.hero-lever-content p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Secondary Outline Button (for hero) */
+.btn-secondary-outline.btn-lg {
+    background: transparent;
+    border: 2px solid rgba(245, 166, 35, 0.5);
+    color: var(--color-orange);
+}
+
+.btn-secondary-outline.btn-lg:hover {
+    background: rgba(245, 166, 35, 0.1);
+    border-color: var(--color-orange);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-lever-item {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
+    }
+    
+    .hero-lever-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    
+    .hero-lever-content h3 {
+        font-size: 1rem;
+    }
+    
+    .hero-lever-content p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-levers-list {
+        gap: var(--spacing-sm);
+    }
+    
+    .hero-lever-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+    
+    .hero-lever-content h3 {
+        font-size: 0.95rem;
+    }
+}

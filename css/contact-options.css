@@ -1,0 +1,243 @@
+/* =====================================================
+   CONTACT OPTIONS - EMAIL & CALENDLY
+   Replaces application form with direct contact methods
+   ===================================================== */
+
+/* Contact Options Grid */
+.contact-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Individual Contact Option Card */
+.contact-option {
+    background: var(--color-dark-secondary);
+    border: 2px solid rgba(245, 166, 35, 0.2);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.contact-option:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245, 166, 35, 0.5);
+    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.15);
+}
+
+/* Primary Option Highlight */
+.contact-option-primary {
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.1) 0%, rgba(244, 178, 35, 0.05) 100%);
+    border: 2px solid rgba(245, 166, 35, 0.4);
+}
+
+.contact-option-primary:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.25);
+}
+
+/* Contact Icon */
+.contact-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.2) 0%, rgba(244, 178, 35, 0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+}
+
+.contact-icon-primary {
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.3) 0%, rgba(244, 178, 35, 0.2) 100%);
+    box-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
+}
+
+.contact-option:hover .contact-icon {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(245, 166, 35, 0.4);
+}
+
+/* Contact Option Title */
+.contact-option h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+}
+
+/* Contact Option Description */
+.contact-option p {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Contact Option Buttons */
+.contact-option .btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+}
+
+/* Calendly Embed Container */
+.calendly-embed-container {
+    margin: 4rem 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.calendly-embed-container h3 {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: var(--color-text-primary);
+}
+
+/* Calendly Widget Styling */
+.calendly-inline-widget {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(245, 166, 35, 0.2);
+}
+
+/* CTA Closing Text */
+.cta-closing {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+}
+
+.cta-closing strong {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .contact-options {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .contact-option {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .contact-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.75rem;
+    }
+    
+    .contact-option h3 {
+        font-size: 1.35rem;
+    }
+    
+    .calendly-embed-container {
+        margin: 3rem 0;
+    }
+    
+    .calendly-inline-widget {
+        height: 650px !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .contact-option {
+        padding: 2rem 1rem;
+    }
+    
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .contact-option h3 {
+        font-size: 1.25rem;
+    }
+    
+    .contact-option p {
+        font-size: 0.95rem;
+    }
+    
+    .contact-option .btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .calendly-embed-container h3 {
+        font-size: 1.5rem;
+    }
+    
+    .calendly-inline-widget {
+        height: 600px !important;
+        min-width: 100% !important;
+    }
+    
+    .cta-closing {
+        font-size: 1rem;
+    }
+}
+
+/* =====================================================
+   HOVER EFFECTS & ANIMATIONS
+   ===================================================== */
+
+/* Button Hover Enhancement */
+.contact-option .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+}
+
+.contact-option .btn-secondary:hover {
+    transform: translateY(-2px);
+    background: rgba(245, 166, 35, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+/* Icon Glow Animation */
+@keyframes icon-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(245, 166, 35, 0.5);
+    }
+}
+
+.contact-icon-primary {
+    animation: icon-glow 3s ease-in-out infinite;
+}
+
+/* Loading State for Calendly Widget */
+.calendly-inline-widget:empty::before {
+    content: "Loading calendar...";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+}

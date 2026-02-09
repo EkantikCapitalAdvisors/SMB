@@ -1,0 +1,285 @@
+/* =====================================================
+   REPORTING & FIT SECTIONS - IMPROVED FORMATTING
+   ===================================================== */
+
+/* ===== Reporting Cadence Section ===== */
+.roadmap-reporting-section {
+    margin-top: var(--spacing-xxl);
+    padding: var(--spacing-xl);
+    background: rgba(245, 166, 35, 0.05);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+}
+
+.section-header-small {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-header-small h3 {
+    font-size: 1.75rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-bold);
+}
+
+.section-header-small p {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.reporting-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.reporting-card-new {
+    background: var(--color-dark-card);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    text-align: center;
+    transition: all var(--transition-normal);
+}
+
+.reporting-card-new:hover {
+    border-color: var(--color-orange);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.3);
+}
+
+.reporting-icon-large {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--color-orange), var(--color-gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    font-size: 2rem;
+    color: var(--color-dark-primary);
+    box-shadow: 0 4px 16px rgba(245, 166, 35, 0.3);
+}
+
+.reporting-card-new h4 {
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.reporting-card-new p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+}
+
+.reporting-frequency {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(245, 166, 35, 0.15);
+    border: 1px solid rgba(245, 166, 35, 0.3);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--color-gold);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===== Fit Section (Who It's For / Not For) ===== */
+.fit-section {
+    padding: var(--spacing-xxl) 0;
+    background: var(--color-dark-primary);
+}
+
+.fit-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+/* Fit Column */
+.fit-column {
+    background: var(--color-dark-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.fit-column-yes {
+    border: 2px solid rgba(46, 204, 113, 0.3);
+}
+
+.fit-column-no {
+    border: 2px solid rgba(231, 76, 60, 0.3);
+}
+
+.fit-column:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Fit Column Header */
+.fit-column-header {
+    padding: var(--spacing-lg);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fit-icon-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    font-size: 2.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.fit-icon-yes {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+}
+
+.fit-icon-no {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.fit-column-header h3 {
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Fit List */
+.fit-list {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Fit Item */
+.fit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.fit-item:hover {
+    background: rgba(245, 166, 35, 0.05);
+}
+
+.fit-item-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    margin-top: 2px;
+}
+
+.fit-column-yes .fit-item-icon {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: white;
+}
+
+.fit-column-no .fit-item-icon {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.fit-item-content {
+    flex: 1;
+}
+
+.fit-item-content strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+    font-weight: var(--font-weight-semibold);
+}
+
+.fit-item-content p {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .fit-comparison {
+        gap: var(--spacing-md);
+    }
+    
+    .reporting-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .fit-comparison {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .fit-icon-large {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+    
+    .roadmap-reporting-section {
+        padding: var(--spacing-md);
+    }
+    
+    .reporting-icon-large {
+        width: 60px;
+        height: 60px;
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .fit-icon-large {
+        width: 60px;
+        height: 60px;
+        font-size: 1.75rem;
+    }
+    
+    .fit-column-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .fit-item {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .fit-item-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+    }
+}
