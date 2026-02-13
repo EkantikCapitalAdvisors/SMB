@@ -91,6 +91,11 @@ function calculateDB() {
     const taxRate = parseFloat(document.getElementById('db-taxrate').value) / 100;
     const years = parseInt(document.getElementById('db-years').value);
     const returnRate = parseFloat(document.getElementById('db-return').value) / 100;
+    
+    // Get enhanced inputs (with defaults if not present)
+    const teamSize = document.getElementById('db-team-size') ? document.getElementById('db-team-size').value : 'solo';
+    const retirementAge = document.getElementById('db-retirement-age') ? parseInt(document.getElementById('db-retirement-age').value) : 65;
+    const employeeLoad = document.getElementById('db-employee-load') ? document.getElementById('db-employee-load').value : 'low';
 
     // Validate inputs
     if (isNaN(age) || isNaN(income) || isNaN(target) || isNaN(taxRate) || isNaN(years) || isNaN(returnRate)) {
@@ -115,6 +120,40 @@ function calculateDB() {
     // Calculate 10-year accumulation (using mid-point contribution)
     const avgContrib = target;
     const accumulation = calculateFV(avgContrib, returnRate, years);
+    
+    // Calculate employee costs based on team size and employee load
+    let employeeCostLow = 0;
+    let employeeCostHigh = 0;
+    
+    if (teamSize !== 'solo') {
+        // Employee load percentages
+        let loadLow, loadHigh;
+        if (employeeLoad === 'low') {
+            loadLow = 0.10;
+            loadHigh = 0.15;
+        } else if (employeeLoad === 'medium') {
+            loadLow = 0.20;
+            loadHigh = 0.30;
+        } else { // high
+            loadLow = 0.35;
+            loadHigh = 0.45;
+        }
+        
+        // Team size multiplier
+        let teamMultiplier = 1;
+        if (teamSize === 'small') {
+            teamMultiplier = 1.2; // 2-5 employees
+        } else if (teamSize === 'larger') {
+            teamMultiplier = 1.8; // 6+ employees
+        }
+        
+        employeeCostLow = contribLow * loadLow * teamMultiplier;
+        employeeCostHigh = contribHigh * loadHigh * teamMultiplier;
+    }
+    
+    // Calculate total plan costs (owner + employees)
+    const totalCostLow = contribLow + employeeCostLow;
+    const totalCostHigh = contribHigh + employeeCostHigh;
 
     // Update outputs
     document.getElementById('db-contribution-range').textContent = 
@@ -128,6 +167,21 @@ function calculateDB() {
     
     document.getElementById('db-accumulation').textContent = 
         formatCurrency(accumulation);
+    
+    // Update employee cost outputs
+    if (document.getElementById('db-employee-cost')) {
+        if (teamSize === 'solo') {
+            document.getElementById('db-employee-cost').textContent = 'N/A (Solo practice)';
+        } else {
+            document.getElementById('db-employee-cost').textContent = 
+                `${formatCurrency(employeeCostLow)} - ${formatCurrency(employeeCostHigh)}`;
+        }
+    }
+    
+    if (document.getElementById('db-total-cost')) {
+        document.getElementById('db-total-cost').textContent = 
+            `${formatCurrency(totalCostLow)} - ${formatCurrency(totalCostHigh)}`;
+    }
 
     // Generate chart data
     const chartData = {
@@ -170,6 +224,10 @@ function calculate831b() {
     const claimsScenario = document.getElementById('b831-claims').value;
     const taxRate = parseFloat(document.getElementById('b831-taxrate').value) / 100;
     const monthlyOverhead = parseFloat(document.getElementById('b831-overhead').value);
+    
+    // Get deductibility haircut (with default if not present)
+    const deductibilityElement = document.getElementById('b831-deductibility');
+    const deductibilityPercent = deductibilityElement ? parseFloat(deductibilityElement.value) / 100 : 1.0;
 
     // Validate inputs
     if (isNaN(premium) || isNaN(admin) || isNaN(returnRate) || isNaN(years) || isNaN(taxRate) || isNaN(monthlyOverhead)) {
@@ -184,8 +242,9 @@ function calculate831b() {
 
     const annualClaims = premium * claimsPercent;
 
-    // Year 1 calculations
-    const taxEffect = premium * taxRate; // If deductible
+    // Year 1 calculations (apply deductibility haircut)
+    const deductiblePortion = premium * deductibilityPercent;
+    const taxEffect = deductiblePortion * taxRate;
     const netReserve = premium - admin - annualClaims;
 
     // 10-year reserve pool calculation
@@ -315,16 +374,28 @@ function calculateSERP() {
 
         // Get leverage inputs
         const cashValue = parseFloat(document.getElementById('serp-cash-value').value) || 0;
+        const loanStartYear = parseInt(document.getElementById('serp-loan-start-year')?.value) || 3;
         const loanRate = parseFloat(document.getElementById('serp-loan-rate').value) / 100;
+        const policyDrag = parseFloat(document.getElementById('serp-policy-drag')?.value || 1.5) / 100;
         const epigReturn = parseFloat(document.getElementById('serp-epig-return').value) / 100;
+        const taxStatus = document.getElementById('serp-tax-status')?.value || 'tax-advantaged';
         const leverageYears = parseInt(document.getElementById('serp-leverage-years').value);
 
+        // Net return after policy drag
+        const netReturn = epigReturn - policyDrag;
+        
+        // If taxable, assume 20% LTCG haircut on gains
+        const effectiveReturn = taxStatus === 'taxable' ? netReturn * 0.80 : netReturn;
+
+        // Calculate years actually compounding (account for loan start year)
+        const activeYears = Math.max(0, leverageYears - loanStartYear + 1);
+        
         // Leverage calculations
         const annualLoanCost = cashValue * loanRate;
-        const fvEPIG = cashValue * Math.pow(1 + epigReturn, leverageYears);
-        const totalInterest = annualLoanCost * leverageYears;
+        const fvEPIG = cashValue * Math.pow(1 + effectiveReturn, activeYears);
+        const totalInterest = annualLoanCost * activeYears;
         const netGain = fvEPIG - cashValue - totalInterest; // FV - principal - interest
-        const spread = (epigReturn - loanRate) * 100;
+        const spread = ((effectiveReturn - loanRate) * 100);
 
         // Double benefit summary
         const totalValueCreated = valueProtected + netGain;
@@ -723,6 +794,301 @@ function toggleAssumptions(drawerId) {
         content.classList.add('open');
         toggle.classList.add('open');
     }
+}
+
+// ========================================
+// PDF EXPORT FUNCTIONS
+// ========================================
+
+function exportDBtoPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(18);
+    doc.setTextColor(245, 166, 35);
+    doc.text('Defined Benefit Plan Calculator', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Ekantik Capital Advisors | Retirement Supercharger', 105, 27, { align: 'center' });
+    
+    // Inputs Section
+    let y = 40;
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Inputs:', 20, y);
+    y += 7;
+    
+    doc.setFontSize(10);
+    const age = document.getElementById('db-age').value;
+    const income = document.getElementById('db-income').value;
+    const target = document.getElementById('db-target').value;
+    const taxRate = document.getElementById('db-taxrate').value;
+    const years = document.getElementById('db-years').value;
+    const returnRate = document.getElementById('db-return').value;
+    
+    doc.text(`• Owner Age: ${age}`, 25, y); y += 6;
+    doc.text(`• Annual Income: $${parseInt(income).toLocaleString()}`, 25, y); y += 6;
+    doc.text(`• Target Contribution: $${parseInt(target).toLocaleString()}`, 25, y); y += 6;
+    doc.text(`• Effective Tax Rate: ${taxRate}%`, 25, y); y += 6;
+    doc.text(`• Years to Project: ${years}`, 25, y); y += 6;
+    doc.text(`• EPIG Return: ${returnRate}%`, 25, y); y += 10;
+    
+    // Outputs Section
+    doc.setFontSize(12);
+    doc.text('Projected Outcomes:', 20, y);
+    y += 7;
+    
+    doc.setFontSize(10);
+    const contribRange = document.getElementById('db-contribution-range').textContent;
+    const taxSavings = document.getElementById('db-tax-savings').textContent;
+    const netCost = document.getElementById('db-net-cost').textContent;
+    const accumulation = document.getElementById('db-accumulation').textContent;
+    
+    doc.text(`• Estimated Annual Contribution Range: ${contribRange}`, 25, y); y += 6;
+    doc.text(`• Year-1 Tax Reduction: ${taxSavings}`, 25, y); y += 6;
+    doc.text(`• Net Out-of-Pocket After Tax Effect: ${netCost}`, 25, y); y += 6;
+    doc.text(`• 10-Year Projected Accumulation: ${accumulation}`, 25, y); y += 10;
+    
+    // Assumptions
+    doc.setFontSize(12);
+    doc.text('Key Assumptions:', 20, y);
+    y += 7;
+    
+    doc.setFontSize(9);
+    doc.text('• Contribution range = Target × (0.8 to 1.2)', 25, y); y += 5;
+    doc.text('• Tax Savings = Contribution × Tax Rate', 25, y); y += 5;
+    doc.text('• Net Out-of-Pocket = Contribution - Tax Savings (pairwise)', 25, y); y += 5;
+    doc.text('• 10-Year Accumulation = FV of annual contributions at return rate', 25, y); y += 10;
+    
+    // Disclaimer
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    const disclaimer = 'Illustrative planning estimate only. Not tax, legal, or investment advice. Results depend on plan design, underwriting, fees, and your specific facts. Consult your CPA and attorney. Generated ' + new Date().toLocaleDateString();
+    const disclaimerLines = doc.splitTextToSize(disclaimer, 170);
+    doc.text(disclaimerLines, 20, y);
+    
+    // Save
+    doc.save('DB-Plan-Calculator-Results.pdf');
+}
+
+function export831btoPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(18);
+    doc.setTextColor(74, 144, 226);
+    doc.text('831(b) Captive Insurance Calculator', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Ekantik Capital Advisors | Retirement Supercharger', 105, 27, { align: 'center' });
+    
+    // Inputs Section
+    let y = 40;
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Inputs:', 20, y);
+    y += 7;
+    
+    doc.setFontSize(10);
+    const premium = document.getElementById('b831-premium').value;
+    const admin = document.getElementById('b831-admin').value;
+    const returnRate = document.getElementById('b831-return').value;
+    const years = document.getElementById('b831-years').value;
+    const claims = document.getElementById('b831-claims').value;
+    const taxRate = document.getElementById('b831-taxrate').value;
+    const overhead = document.getElementById('b831-overhead').value;
+    const deductibility = document.getElementById('b831-deductibility')?.value || '100';
+    
+    doc.text(`• Annual Premium: $${parseInt(premium).toLocaleString()}`, 25, y); y += 6;
+    doc.text(`• Admin/Operating Costs: $${parseInt(admin).toLocaleString()}`, 25, y); y += 6;
+    doc.text(`• Reserve Investment Return: ${returnRate}%`, 25, y); y += 6;
+    doc.text(`• Years to Project: ${years}`, 25, y); y += 6;
+    doc.text(`• Claims Scenario: ${claims}`, 25, y); y += 6;
+    doc.text(`• Effective Tax Rate: ${taxRate}%`, 25, y); y += 6;
+    doc.text(`• Monthly Overhead: $${parseInt(overhead).toLocaleString()}`, 25, y); y += 6;
+    doc.text(`• Deductibility Haircut: ${deductibility}%`, 25, y); y += 10;
+    
+    // Outputs Section
+    doc.setFontSize(12);
+    doc.text('Projected Outcomes:', 20, y);
+    y += 7;
+    
+    doc.setFontSize(10);
+    const taxEffect = document.getElementById('b831-tax-effect').textContent;
+    const netReserve = document.getElementById('b831-net-reserve').textContent;
+    const reservePool = document.getElementById('b831-reserve-pool').textContent;
+    const shock = document.getElementById('b831-shock').textContent;
+    
+    doc.text(`• Year-1 Illustrative Tax Effect: ${taxEffect}`, 25, y); y += 6;
+    doc.text(`• Year-1 Net Reserve Accumulation: ${netReserve}`, 25, y); y += 6;
+    doc.text(`• 10-Year Reserve Pool: ${reservePool}`, 25, y); y += 6;
+    doc.text(`• Shock Resistance: ${shock}`, 25, y); y += 10;
+    
+    // Disclaimer
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    const disclaimer = '831(b) premium deductibility depends on proper risk distribution, arm\'s-length underwriting, adequate capitalization, and documentation. The IRS has challenged abusive structures. Work with experienced captive counsel. Illustrative planning estimate only. Not tax, legal, or investment advice. Generated ' + new Date().toLocaleDateString();
+    const disclaimerLines = doc.splitTextToSize(disclaimer, 170);
+    doc.text(disclaimerLines, 20, y);
+    
+    // Save
+    doc.save('831b-Captive-Calculator-Results.pdf');
+}
+
+function exportSERPtoPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(18);
+    doc.setTextColor(76, 175, 80);
+    doc.text('SERP Retention ROI Calculator', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Ekantik Capital Advisors | Retirement Supercharger', 105, 27, { align: 'center' });
+    
+    // Inputs Section
+    let y = 40;
+    doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Inputs:', 20, y);
+    y += 7;
+    
+    doc.setFontSize(10);
+    const comp = document.getElementById('serp-comp').value;
+    const replacement = document.getElementById('serp-replacement').value;
+    const profitRisk = document.getElementById('serp-profit-risk').value;
+    const funding = document.getElementById('serp-funding').value;
+    const vesting = document.getElementById('serp-vesting').value;
+    const departure = document.getElementById('serp-departure').value;
+    
+    doc.text(`• Key Employee Compensation: $${parseInt(comp).toLocaleString()}`, 25, y); y += 6;
+    doc.text(`• Replacement Cost Multiplier: ${replacement}x`, 25, y); y += 6;
+    doc.text(`• Annual Profit at Risk: $${parseInt(profitRisk).toLocaleString()}`, 25, y); y += 6;
+    doc.text(`• Annual SERP Funding: $${parseInt(funding).toLocaleString()}`, 25, y); y += 6;
+    doc.text(`• Vesting Period: ${vesting} years`, 25, y); y += 6;
+    doc.text(`• Departure Probability Reduction: ${departure}%`, 25, y); y += 10;
+    
+    // Outputs Section
+    doc.setFontSize(12);
+    doc.text('Retention ROI Analysis:', 20, y);
+    y += 7;
+    
+    doc.setFontSize(10);
+    const costLoss = document.getElementById('serp-cost-loss').textContent;
+    const investment = document.getElementById('serp-investment').textContent;
+    const valueProtected = document.getElementById('serp-value-protected').textContent;
+    const continuity = document.getElementById('serp-continuity').textContent;
+    
+    doc.text(`• Estimated Cost of Loss: ${costLoss}`, 25, y); y += 6;
+    doc.text(`• Total SERP Investment: ${investment}`, 25, y); y += 6;
+    doc.text(`• Expected Value Protected: ${valueProtected}`, 25, y); y += 6;
+    doc.text(`• Continuity Score: ${continuity}`, 25, y); y += 10;
+    
+    // Leverage (if enabled)
+    const leverageEnabled = document.getElementById('serp-leverage-enabled').checked;
+    if (leverageEnabled) {
+        doc.setFontSize(12);
+        doc.text('Policy Loan Leverage:', 20, y);
+        y += 7;
+        
+        doc.setFontSize(10);
+        const borrowed = document.getElementById('serp-borrowed-capital').textContent;
+        const loanCost = document.getElementById('serp-loan-cost').textContent;
+        const netGain = document.getElementById('serp-net-gain').textContent;
+        
+        doc.text(`• Borrowed Capital: ${borrowed}`, 25, y); y += 6;
+        doc.text(`• Annual Loan Cost: ${loanCost}`, 25, y); y += 6;
+        doc.text(`• Net Gain from Leverage: ${netGain}`, 25, y); y += 10;
+    }
+    
+    // Disclaimer
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    const disclaimer = 'SERPs are non-qualified deferred compensation plans subject to IRC §409A. Policy loan leverage involves risks. EPIG returns not guaranteed. Illustrative planning estimate only. Not tax, legal, or investment advice. Consult your advisors. Generated ' + new Date().toLocaleDateString();
+    const disclaimerLines = doc.splitTextToSize(disclaimer, 170);
+    doc.text(disclaimerLines, 20, y);
+    
+    // Save
+    doc.save('SERP-Calculator-Results.pdf');
+}
+
+function exportMastertoPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFontSize(18);
+    doc.setTextColor(245, 166, 35);
+    doc.text('Master 10-Year Retirement Supercharger', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Ekantik Capital Advisors | Complete Analysis Report', 105, 27, { align: 'center' });
+    
+    // Key Results
+    let y = 40;
+    doc.setFontSize(14);
+    doc.setTextColor(0, 0, 0);
+    doc.text('10-Year Wealth Creation Summary:', 20, y);
+    y += 10;
+    
+    doc.setFontSize(11);
+    const totalTax = document.getElementById('master-total-tax').textContent;
+    const totalAccum = document.getElementById('master-total-accumulation').textContent;
+    const totalReserve = document.getElementById('master-total-reserve').textContent;
+    
+    doc.text(`Total Tax Savings: ${totalTax}`, 25, y); y += 8;
+    doc.text(`Total Retirement Accumulation: ${totalAccum}`, 25, y); y += 8;
+    doc.text(`Total Reserve Pool: ${totalReserve}`, 25, y); y += 12;
+    
+    // Tax Savings Multiplier
+    doc.setFontSize(14);
+    doc.setTextColor(245, 166, 35);
+    doc.text('Tax Savings Multiplier:', 20, y);
+    y += 10;
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    const taxSaved = document.getElementById('wow-tax-saved').textContent;
+    const costs = document.getElementById('wow-costs').textContent;
+    const fvInvested = document.getElementById('wow-fv-invested').textContent;
+    const reserves = document.getElementById('wow-reserves').textContent;
+    const exit = document.getElementById('wow-exit').textContent;
+    const netValue = document.getElementById('wow-net-value').textContent;
+    const multiplier = document.getElementById('wow-multiplier').textContent;
+    
+    doc.text(`Cumulative Tax Saved: ${taxSaved}`, 25, y); y += 7;
+    doc.text(`Net Costs (All Fees): ${costs}`, 25, y); y += 7;
+    doc.text(`Future Value (Invested): ${fvInvested}`, 25, y); y += 7;
+    doc.text(`Reserves Accumulated: ${reserves}`, 25, y); y += 7;
+    doc.text(`Exit Uplift: ${exit}`, 25, y); y += 10;
+    
+    doc.setFontSize(13);
+    doc.setTextColor(245, 166, 35);
+    doc.text(`Net Value Created: ${netValue}`, 25, y); y += 8;
+    doc.text(`Multiplier: ${multiplier}`, 25, y); y += 15;
+    
+    // Formula
+    doc.setFontSize(9);
+    doc.setTextColor(100, 100, 100);
+    doc.text('Formula: Net Value Created ÷ Cumulative Tax Saved', 25, y); y += 5;
+    doc.text('Key Insight: Tax savings become seed capital for long-term wealth creation.', 25, y); y += 10;
+    
+    // Disclaimer
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    const disclaimer = 'All projections are illustrative and depend on eligibility, plan design, compliance with IRS/DOL rules, market performance, and individual circumstances. This is not a guarantee of results. Consult licensed professionals (CPA, attorney, actuary) before implementing any strategy. Generated ' + new Date().toLocaleDateString();
+    const disclaimerLines = doc.splitTextToSize(disclaimer, 170);
+    doc.text(disclaimerLines, 20, y);
+    
+    // Save
+    doc.save('Master-Retirement-Supercharger-Report.pdf');
 }
 
 // ========================================
