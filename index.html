@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Retirement Supercharger for Small Business Owners: Defined Benefit Plan + 831(b) + SERP, powered by EPIG 500 compounding. Limited Founding Member cohort.">
+    <meta name="description" content="Retirement Supercharger for Small Business Owners: Defined Benefit Plan + 831(b) + SERP, powered by EPIG compounding. Limited Founding Member cohort.">
     <title>Ekantik Capital Advisors - Retirement Supercharger | Founding Member Enrollment</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/retirement-calculators.css">
@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <!-- Soft Launch Banner -->
@@ -63,7 +64,7 @@
                 </div>
                 <h1>Turn Tax-Optimized Structures Into Accelerated Retirement Outcomes</h1>
                 <p class="hero-description">
-                    Four levers working together: Defined Benefit Plan, 831(b), SERP, and EPIG 500 compounding. A fiduciary-minded, performance-aligned advisory program built for small business owners who want structure, not guesswork.
+                    Four levers working together: Defined Benefit Plan, 831(b), SERP, and EPIG compounding. A fiduciary-minded, performance-aligned advisory program built for small business owners who want structure, not guesswork.
                 </p>
                 
                 <!-- 3 Levers List -->
@@ -91,7 +92,7 @@
                             <i class="fas fa-check-circle"></i>
                         </div>
                         <div class="hero-lever-content">
-                            <h3>EPIG 500 Compounding:</h3>
+                            <h3>EPIG Compounding:</h3>
                             <p>Deploy saved capital into a risk-managed growth sleeve designed for long-term wealth</p>
                         </div>
                     </div>
@@ -139,13 +140,13 @@
         </div>
     </section>
 
-    <!-- The 3 Levers + EPIG 500 Super Booster -->
+    <!-- The 3 Levers + EPIG Super Booster -->
     <section id="levers" class="levers-section">
         <div class="container">
             <div class="section-header">
-                <h2>The 3 Levers <span style="color: var(--color-orange); font-weight: 700;">Powered by EPIG 500</span></h2>
+                <h2>The 3 Levers <span style="color: var(--color-orange); font-weight: 700;">Powered by EPIG</span></h2>
                 <p class="section-intro">
-                    EPIG 500 sits at the center—supercharging each lever with compounding growth. Three levers create the fuel (tax savings, reserves, retention); EPIG 500 multiplies the impact.
+                    EPIG sits at the center—supercharging each lever with compounding growth. Three levers create the fuel (tax savings, reserves, retention); EPIG multiplies the impact.
                 </p>
             </div>
 
@@ -190,14 +191,14 @@
                     <div class="power-line power-line-right"></div>
                 </div>
 
-                <!-- Center: EPIG 500 Super Booster -->
+                <!-- Center: EPIG Super Booster -->
                 <div class="epig-super-booster">
                     <div class="booster-glow"></div>
                     <div class="booster-content">
                         <div class="booster-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
-                        <h3>EPIG 500</h3>
+                        <h3>EPIG</h3>
                         <p class="booster-tagline">The Compounding Engine</p>
                         <div class="booster-stats">
                             <div class="booster-stat">
@@ -231,7 +232,7 @@
                 <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="flow-step">
                     <div class="flow-number">2</div>
-                    <p><strong>Deploy to EPIG 500:</strong> Redeploy saved capital into risk-managed compounding</p>
+                    <p><strong>Deploy to EPIG:</strong> Redeploy saved capital into risk-managed compounding</p>
                 </div>
                 <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
                 <div class="flow-step">
@@ -321,7 +322,7 @@
                         </div>
 
                         <div class="input-group">
-                            <label for="db-return">EPIG 500 Assumed Return (%)</label>
+                            <label for="db-return">EPIG Assumed Return (%)</label>
                             <div class="preset-buttons">
                                 <button class="preset-btn" data-value="5">Conservative (5%)</button>
                                 <button class="preset-btn active" data-value="8">Base (8%)</button>
@@ -329,6 +330,48 @@
                             </div>
                             <input type="number" id="db-return" value="8" min="0" max="20" step="0.5">
                             <span class="input-hint">Illustrative only—not guaranteed</span>
+                        </div>
+
+                        <hr style="margin: var(--spacing-lg) 0; border-color: rgba(245, 166, 35, 0.3);">
+                        <h4>Practice Details (Optional but Recommended)</h4>
+
+                        <div class="input-group">
+                            <label>Practice Team Size</label>
+                            <div class="preset-buttons">
+                                <button class="preset-btn active" data-target="db-team-size" data-value="solo">Solo</button>
+                                <button class="preset-btn" data-target="db-team-size" data-value="small">Small Team (2-5)</button>
+                                <button class="preset-btn" data-target="db-team-size" data-value="larger">Larger (6+)</button>
+                            </div>
+                            <input type="hidden" id="db-team-size" value="solo">
+                            <span class="input-hint">
+                                <i class="fas fa-info-circle"></i> Why this matters: DB Plans covering employees can cost 20-40% more annually
+                            </span>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Target Retirement Age</label>
+                            <div class="preset-buttons">
+                                <button class="preset-btn" data-target="db-retirement-age" data-value="62">Age 62</button>
+                                <button class="preset-btn active" data-target="db-retirement-age" data-value="65">Age 65</button>
+                                <button class="preset-btn" data-target="db-retirement-age" data-value="67">Age 67</button>
+                            </div>
+                            <input type="hidden" id="db-retirement-age" value="65">
+                            <span class="input-hint">
+                                <i class="fas fa-info-circle"></i> Older retirement age = lower required annual contributions
+                            </span>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Employee Contribution Load</label>
+                            <div class="preset-buttons">
+                                <button class="preset-btn active" data-target="db-employee-load" data-value="low">Low (10-15%)</button>
+                                <button class="preset-btn" data-target="db-employee-load" data-value="medium">Medium (20-30%)</button>
+                                <button class="preset-btn" data-target="db-employee-load" data-value="high">High (35-45%)</button>
+                            </div>
+                            <input type="hidden" id="db-employee-load" value="low">
+                            <span class="input-hint">
+                                <i class="fas fa-info-circle"></i> % of total plan cost going to employees (planning proxy)
+                            </span>
                         </div>
 
                         <button class="btn btn-secondary btn-block" onclick="calculateDB()">
@@ -364,12 +407,28 @@
                         <div class="output-card output-card-highlight">
                             <div class="output-label">10-Year Projected Accumulation</div>
                             <div class="output-value" id="db-accumulation">$2,160,000</div>
-                            <div class="output-note">Illustrative—assumes consistent contributions + EPIG 500 compounding at 8%</div>
+                            <div class="output-note">Illustrative—assumes consistent contributions + EPIG compounding at 8%</div>
+                        </div>
+
+                        <div class="output-card">
+                            <div class="output-label">Estimated Employee Cost (Annual Range)</div>
+                            <div class="output-value" id="db-employee-cost">$15,000 - $45,000</div>
+                            <div class="output-note">If applicable; varies by demographics and plan design</div>
+                        </div>
+
+                        <div class="output-card">
+                            <div class="output-label">Estimated Total Plan Cost (Annual)</div>
+                            <div class="output-value" id="db-total-cost">$135,000 - $225,000</div>
+                            <div class="output-note">Owner + employee contributions (if team-based plan)</div>
                         </div>
 
                         <div class="output-chart">
                             <canvas id="db-chart"></canvas>
                         </div>
+
+                        <button class="btn btn-primary btn-block" onclick="exportDBtoPDF()" style="margin-top: var(--spacing-md);">
+                            <i class="fas fa-file-pdf"></i> Download Results (1-Page PDF)
+                        </button>
 
                         <div class="compliance-note">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -392,7 +451,7 @@
                                             <li>Target Contribution: $150,000</li>
                                             <li>Effective Tax Rate: 38%</li>
                                             <li>Years to Retirement: 10</li>
-                                            <li>Investment Return: 8% annual (EPIG 500 base case)</li>
+                                            <li>Investment Return: 8% annual (EPIG base case)</li>
                                         </ul>
                                     </div>
                                     
@@ -522,6 +581,31 @@
                         </div>
 
                         <div class="input-group">
+                            <label>Deductibility Haircut (Compliance Scenario)</label>
+                            <div class="preset-buttons">
+                                <button class="preset-btn active" data-target="b831-deductibility" data-value="100">100% Deductible</button>
+                                <button class="preset-btn" data-target="b831-deductibility" data-value="75">75% Allowed</button>
+                                <button class="preset-btn" data-target="b831-deductibility" data-value="50">50% Allowed</button>
+                            </div>
+                            <input type="hidden" id="b831-deductibility" value="100">
+                            <span class="input-hint">
+                                <i class="fas fa-exclamation-triangle"></i> Conservative planning: model reduced deductibility scenarios
+                            </span>
+                        </div>
+
+                        <div class="compliance-reality-box" style="margin: var(--spacing-md) 0; padding: var(--spacing-md); background: rgba(245, 166, 35, 0.1); border-left: 3px solid var(--accent-color); border-radius: 4px;">
+                            <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                <i class="fas fa-shield-alt" style="color: var(--accent-color); margin-top: 3px;"></i>
+                                <div style="flex: 1; font-size: 0.9rem;">
+                                    <strong style="color: var(--accent-color);">Compliance Reality</strong>
+                                    <p style="margin: 8px 0 0 0; line-height: 1.5; color: #d0d0d0;">
+                                        831(b) premium deductibility depends on proper risk distribution, arm's-length underwriting, adequate capitalization, and documentation. The IRS has challenged abusive structures. Work with experienced captive counsel and maintain complete contemporaneous records.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
                             <label for="b831-overhead">Monthly Practice Overhead</label>
                             <div class="input-with-prefix">
                                 <span class="prefix">$</span>
@@ -569,6 +653,10 @@
                         <div class="output-chart">
                             <canvas id="b831-chart"></canvas>
                         </div>
+
+                        <button class="btn btn-primary btn-block" onclick="export831btoPDF()" style="margin-top: var(--spacing-md);">
+                            <i class="fas fa-file-pdf"></i> Download Results (1-Page PDF)
+                        </button>
 
                         <div class="compliance-note">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -644,7 +732,7 @@
                 </div>
                 <h2>SERP: Supplemental Executive Retirement Plan</h2>
                 <p class="module-intro">
-                    A SERP is a vesting-based retirement benefit for key employees—"golden handcuffs" that reduce departure risk while building long-term loyalty. <strong>Powerful Addition:</strong> When funded with permanent life insurance, you can borrow against the policy's cash value at a fixed rate and deploy that capital into EPIG 500 for compounding growth. <strong>Result:</strong> Double benefit—retention + leveraged wealth building.
+                    A SERP is a vesting-based retirement benefit for key employees—"golden handcuffs" that reduce departure risk while building long-term loyalty. <strong>Powerful Addition:</strong> When funded with permanent life insurance, you can borrow against the policy's cash value at a fixed rate and deploy that capital into EPIG for compounding growth. <strong>Result:</strong> Double benefit—retention + leveraged wealth building.
                 </p>
             </div>
 
@@ -656,7 +744,7 @@
                 <div class="explainer-card">
                     <h3>Why It Matters (Double Benefit)</h3>
                     <p><strong>Benefit #1 (Retention):</strong> Losing a key employee costs 3-5X their salary. A SERP creates golden handcuffs that reduce turnover risk.</p>
-                    <p><strong>Benefit #2 (Leverage):</strong> Borrow against policy cash value at a fixed rate and deploy into EPIG 500 for higher returns. The spread between loan rate (5-6%) and EPIG returns (8-12%) creates leveraged compounding.</p>
+                    <p><strong>Benefit #2 (Leverage):</strong> Borrow against policy cash value at a fixed rate and deploy into EPIG for higher returns. The spread between loan rate (5-6%) and EPIG returns (8-12%) creates leveraged compounding.</p>
                 </div>
                 <div class="explainer-card">
                     <h3>When It Fits</h3>
@@ -689,8 +777,15 @@
 
                         <div class="input-group">
                             <label for="serp-replacement">Replacement Cost Multiplier</label>
-                            <input type="number" id="serp-replacement" value="3" min="1" max="10" step="0.5">
-                            <span class="input-hint">Typical range: 2X - 5X annual comp</span>
+                            <div class="preset-buttons">
+                                <button class="preset-btn active" data-target="serp-replacement" data-value="1.5">Conservative (1.5×)</button>
+                                <button class="preset-btn" data-target="serp-replacement" data-value="2.0">Typical (2.0×)</button>
+                                <button class="preset-btn" data-target="serp-replacement" data-value="3.0">Critical (3.0×)</button>
+                            </div>
+                            <input type="number" id="serp-replacement" value="2.0" min="1" max="5" step="0.5">
+                            <span class="input-hint">
+                                <i class="fas fa-info-circle"></i> Dentist-realistic: 1.5-2× for most roles; 3× for critical positions
+                            </span>
                         </div>
 
                         <div class="input-group">
@@ -745,13 +840,29 @@
                             </div>
 
                             <div class="input-group">
+                                <label for="serp-loan-start-year">Year Loan Begins</label>
+                                <input type="number" id="serp-loan-start-year" value="3" min="1" max="10" step="1">
+                                <span class="input-hint">
+                                    <i class="fas fa-info-circle"></i> Policy needs 2-4 years to build sufficient cash value
+                                </span>
+                            </div>
+
+                            <div class="input-group">
                                 <label for="serp-loan-rate">Policy Loan Rate (%)</label>
                                 <input type="number" id="serp-loan-rate" value="5.5" min="0" max="15" step="0.25">
                                 <span class="input-hint">Typical range: 5-6% fixed</span>
                             </div>
 
                             <div class="input-group">
-                                <label for="serp-epig-return">EPIG 500 Target Return (%)</label>
+                                <label for="serp-policy-drag">Annual Policy Charge/Drag (%)</label>
+                                <input type="number" id="serp-policy-drag" value="1.5" min="0" max="5" step="0.25">
+                                <span class="input-hint">
+                                    <i class="fas fa-info-circle"></i> Reduces net return: mortality, admin, insurance costs
+                                </span>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="serp-epig-return">EPIG Target Return (%)</label>
                                 <div class="preset-buttons">
                                     <button class="preset-btn" data-value="5">Conservative (5%)</button>
                                     <button class="preset-btn active" data-value="8">Base (8%)</button>
@@ -759,6 +870,18 @@
                                 </div>
                                 <input type="number" id="serp-epig-return" value="8" min="0" max="20" step="0.5">
                                 <span class="input-hint">Illustrative—not guaranteed</span>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="serp-tax-status">Return Tax Treatment</label>
+                                <div class="preset-buttons">
+                                    <button class="preset-btn active" data-target="serp-tax-status" data-value="tax-advantaged">Tax-Advantaged</button>
+                                    <button class="preset-btn" data-target="serp-tax-status" data-value="taxable">Taxable</button>
+                                </div>
+                                <input type="hidden" id="serp-tax-status" value="tax-advantaged">
+                                <span class="input-hint">
+                                    <i class="fas fa-info-circle"></i> Within policy = tax-advantaged; outside = taxable gains
+                                </span>
                             </div>
 
                             <div class="input-group">
@@ -813,7 +936,7 @@
                             <h4 style="color: var(--color-gold); margin-bottom: var(--spacing-md);">Policy Loan Leverage Results</h4>
 
                             <div class="output-card output-card-primary">
-                                <div class="output-label">Borrowed Capital Deployed to EPIG 500</div>
+                                <div class="output-label">Borrowed Capital Deployed to EPIG</div>
                                 <div class="output-value" id="serp-borrowed-capital">$150,000</div>
                                 <div class="output-note">One-time loan against policy cash value</div>
                             </div>
@@ -825,7 +948,7 @@
                             </div>
 
                             <div class="output-card output-card-highlight">
-                                <div class="output-label">10-Year Future Value (EPIG 500)</div>
+                                <div class="output-label">10-Year Future Value (EPIG)</div>
                                 <div class="output-value" id="serp-fv-epig">$324,000</div>
                                 <div class="output-note">Borrowed capital compounded at 8%</div>
                             </div>
@@ -863,9 +986,13 @@
                             <canvas id="serp-chart"></canvas>
                         </div>
 
+                        <button class="btn btn-primary btn-block" onclick="exportSERPtoPDF()" style="margin-top: var(--spacing-md);">
+                            <i class="fas fa-file-pdf"></i> Download Results (1-Page PDF)
+                        </button>
+
                         <div class="compliance-note">
                             <i class="fas fa-exclamation-triangle"></i>
-                            <p><strong>Compliance Reminder:</strong> SERPs are non-qualified deferred compensation plans subject to IRC §409A and other rules. Design, funding, and tax treatment vary significantly. <strong>Policy Loan Leverage:</strong> Borrowing against life insurance cash value involves risks—loan interest accumulates, and if not repaid, can reduce death benefit or cause policy lapse. EPIG 500 returns are not guaranteed and may be negative. The spread between loan rate and investment returns is illustrative only. Consult legal, tax, and financial advisors before implementing.</p>
+                            <p><strong>Compliance Reminder:</strong> SERPs are non-qualified deferred compensation plans subject to IRC §409A and other rules. Design, funding, and tax treatment vary significantly. <strong>Policy Loan Leverage:</strong> Borrowing against life insurance cash value involves risks—loan interest accumulates, and if not repaid, can reduce death benefit or cause policy lapse. EPIG returns are not guaranteed and may be negative. The spread between loan rate and investment returns is illustrative only. Consult legal, tax, and financial advisors before implementing.</p>
                         </div>
                         
                         <!-- Assumptions Drawer -->
@@ -885,7 +1012,7 @@
                                             <li>Vesting Period: 7 years</li>
                                             <li>Departure Probability Reduction: 50%</li>
                                             <li>Policy Loan Rate: 5.5% (if leverage enabled)</li>
-                                            <li>EPIG 500 Target Return: 8% (if leverage enabled)</li>
+                                            <li>EPIG Target Return: 8% (if leverage enabled)</li>
                                             <li>Leverage Time Horizon: 10 years (if enabled)</li>
                                         </ul>
                                     </div>
@@ -910,7 +1037,7 @@
                                             <li><strong>Policy loan interest accumulation</strong> (interest compounds if not paid)</li>
                                             <li><strong>Death benefit reduction</strong> (loans reduce payout if not repaid)</li>
                                             <li><strong>Policy lapse risk</strong> (insufficient cash value to cover loans + charges)</li>
-                                            <li><strong>EPIG 500 management fee</strong> (1% AUM charged quarterly)</li>
+                                            <li><strong>EPIG management fee</strong> (1% AUM charged quarterly)</li>
                                             <li><strong>Market volatility</strong> (EPIG returns are illustrative; actual returns vary)</li>
                                             <li><strong>§409A compliance costs</strong> (documentation, ongoing monitoring)</li>
                                             <li><strong>Alternative employee retention strategies</strong> (equity, bonuses, culture)</li>
@@ -926,7 +1053,7 @@
         </div>
     </section>
 
-    <!-- EPIG 500 Bridging Section -->
+    <!-- EPIG Bridging Section -->
     <section id="epig-section" class="epig-bridge">
         <div class="container">
             <div class="section-header">
@@ -934,7 +1061,7 @@
                     <i class="fas fa-rocket"></i>
                     <span>LEVER #4</span>
                 </div>
-                <h2>EPIG 500: The Compounding Engine</h2>
+                <h2>EPIG: The Compounding Engine</h2>
                 <p class="section-intro">
                     A rule-based S&P 500 strategy with systematic downside protection. Deploy freed cash flow (from tax savings + reserves) into a risk-managed growth strategy designed for long-term wealth building.
                 </p>
@@ -942,7 +1069,7 @@
 
             <div class="epig-explainer">
                 <div class="epig-card">
-                    <h3>What EPIG 500 Is</h3>
+                    <h3>What EPIG Is</h3>
                     <p><strong>EPIG = Enduring Principal-Protected Income & Growth</strong></p>
                     <p>A proprietary rule-based investment strategy that tracks the S&P 500 during up markets while implementing systematic downside protection during corrections. Designed to outperform over full market cycles (bull + bear combined).</p>
                     <ul>
@@ -988,28 +1115,28 @@
                     <h3>Key Details</h3>
                     <ul>
                         <li><strong>Minimum Investment:</strong> $100,000</li>
-                        <li><strong>Management Fee:</strong> 1% AUM (charged quarterly) — applies to EPIG 500 strategy only</li>
+                        <li><strong>Management Fee:</strong> 1% AUM (charged quarterly) — applies to EPIG strategy only</li>
                         <li><strong>Custodian:</strong> Interactive Brokers (you maintain account ownership)</li>
                         <li><strong>Status:</strong> Soft launch phase — accepting qualified investors</li>
                         <li><strong>Strategy:</strong> Systematic rules-based, no discretionary trading</li>
                         <li><strong>Deployment:</strong> DB Plan assets, 831(b) reserves, SERP policy loans, or direct capital</li>
                     </ul>
-                    <p class="epig-disclaimer"><strong>Important:</strong> EPIG 500 is currently in soft launch phase for educational purposes and interest validation. All performance figures (16.1% CAGR, +2.6% alpha, 0% downside capture) are backtested results based on historical data from 2000-2026. Actual live performance may differ significantly. Suitability assessment required.</p>
+                    <p class="epig-disclaimer"><strong>Important:</strong> EPIG is currently in soft launch phase for educational purposes and interest validation. All performance figures (16.1% CAGR, +2.6% alpha, 0% downside capture) are backtested results based on historical data from 2000-2026. Actual live performance may differ significantly. Suitability assessment required.</p>
                 </div>
             </div>
 
             <div class="epig-cta">
-                <h3>Learn More About EPIG 500</h3>
-                <p>Explore the full EPIG 500 strategy, backtested performance, methodology, and how it fits into your retirement acceleration plan.</p>
+                <h3>Learn More About EPIG</h3>
+                <p>Explore the full EPIG strategy, backtested performance, methodology, and how it fits into your retirement acceleration plan.</p>
                 <a href="https://epig500.ekantikcapital.com/" target="_blank" class="btn btn-primary btn-lg">
-                    <i class="fas fa-external-link-alt"></i> Visit EPIG 500 Landing Page
+                    <i class="fas fa-external-link-alt"></i> Visit EPIG Landing Page
                 </a>
                 <p class="epig-cta-note">Learn about the rule-based S&P 500 strategy with systematic downside protection</p>
             </div>
 
             <div class="epig-integration">
-                <h3>How EPIG 500 Amplifies Your Retirement Outcome</h3>
-                <p>The Master Dashboard below shows the full 10-year picture: DB Plan + 831(b) + SERP + EPIG 500 compounding, with a "Tax Savings Multiplier" that illustrates how $1 saved can turn into $4-6 of net value created.</p>
+                <h3>How EPIG Amplifies Your Retirement Outcome</h3>
+                <p>The Master Dashboard below shows the full 10-year picture: DB Plan + 831(b) + SERP + EPIG compounding, with a "Tax Savings Multiplier" that illustrates how $1 saved can turn into $4-6 of net value created.</p>
                 <a href="#master-dashboard" class="btn btn-secondary btn-lg">
                     <i class="fas fa-chart-line"></i> Go to Master Dashboard
                 </a>
@@ -1027,7 +1154,7 @@
                 </div>
                 <h2>10-Year Retirement Supercharger: Master Dashboard</h2>
                 <p class="module-intro">
-                    This dashboard combines all four levers (DB Plan, 831(b), SERP, EPIG 500) into a single 10-year projection. See the compounding effect of tax-optimized structures + disciplined capital deployment. <strong>Default preset: Dental practice owner.</strong>
+                    This dashboard combines all four levers (DB Plan, 831(b), SERP, EPIG) into a single 10-year projection. See the compounding effect of tax-optimized structures + disciplined capital deployment. <strong>Default preset: Dental practice owner.</strong>
                 </p>
             </div>
 
@@ -1165,7 +1292,7 @@
                         <h4>Allocation & Returns</h4>
 
                         <div class="input-group">
-                            <label for="master-epig-return">EPIG 500 Return (%)</label>
+                            <label for="master-epig-return">EPIG Return (%)</label>
                             <div class="preset-buttons">
                                 <button class="preset-btn" data-value="5">Conservative (5%)</button>
                                 <button class="preset-btn active" data-value="8">Base (8%)</button>
@@ -1337,7 +1464,7 @@ Net Value Created =
 
 Multiplier = Net Value Created ÷ Cumulative Tax Saved
                                     </pre>
-                                    <p><strong>Key Insight:</strong> By coordinating DB Plans, 831(b), SERP, and EPIG 500 compounding, the tax savings become the "seed capital" for long-term wealth creation. The multiplier shows how much net value you generate for every dollar saved in taxes.</p>
+                                    <p><strong>Key Insight:</strong> By coordinating DB Plans, 831(b), SERP, and EPIG compounding, the tax savings become the "seed capital" for long-term wealth creation. The multiplier shows how much net value you generate for every dollar saved in taxes.</p>
                                 </div>
                             </div>
 
@@ -1348,6 +1475,10 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
                                 <p class="wow-cta-note">Short application. If we're a fit, you'll get an invite to a strategy session.</p>
                             </div>
                         </div>
+
+                        <button class="btn btn-primary btn-block btn-lg" onclick="exportMastertoPDF()" style="margin: var(--spacing-lg) 0;">
+                            <i class="fas fa-file-pdf"></i> Download Complete Report (1-Page PDF)
+                        </button>
 
                         <div class="compliance-note">
                             <i class="fas fa-exclamation-triangle"></i>
@@ -1371,7 +1502,7 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
                                             <li>DB Plan Contribution: $150,000 annually</li>
                                             <li>831(b) Premium: Not enabled (optional)</li>
                                             <li>SERP Funding: $25,000 annually</li>
-                                            <li>EPIG 500 Return: 8% (Base case)</li>
+                                            <li>EPIG Return: 8% (Base case)</li>
                                             <li>Exit Valuation Multiple: 3.5x SDE</li>
                                             <li>Reinvestment Efficiency: 75%</li>
                                             <li>ECA Advisory Fee: User input required (no default)</li>
@@ -1519,7 +1650,7 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
                                 <div class="deliverable-icon">
                                     <i class="fas fa-rocket"></i>
                                 </div>
-                                <h4>EPIG 500 Setup</h4>
+                                <h4>EPIG Setup</h4>
                                 <p>Deploy initial capital, establish custodial accounts, set risk parameters</p>
                             </div>
                             <div class="deliverable-card">
@@ -1576,7 +1707,7 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
                                     <i class="fas fa-chart-area"></i>
                                 </div>
                                 <h4>Investment Monitoring</h4>
-                                <p>Track EPIG 500 performance, rebalance as needed, adjust risk exposure</p>
+                                <p>Track EPIG performance, rebalance as needed, adjust risk exposure</p>
                             </div>
                             <div class="deliverable-card">
                                 <div class="deliverable-icon">
@@ -1919,7 +2050,7 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>That's fine. Not everyone needs all three. We'll assess your situation and recommend the strategies that fit. Many Founding Members start with DB Plan + EPIG 500, then add 831(b) or SERP later as the business grows.</p>
+                        <p>That's fine. Not everyone needs all three. We'll assess your situation and recommend the strategies that fit. Many Founding Members start with DB Plan + EPIG, then add 831(b) or SERP later as the business grows.</p>
                     </div>
                 </div>
 
@@ -1955,11 +2086,11 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h4>What is EPIG 500 and what returns can I expect?</h4>
+                        <h4>What is EPIG and what returns can I expect?</h4>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>EPIG 500 is a risk-managed compounding strategy that deploys freed cash flow (from tax savings + reserves) into diversified investments. <strong>Illustrative return scenarios:</strong> Conservative 5%, Base 8%, Strong 12%. <strong>Important:</strong> These are not guarantees. Actual returns depend on market conditions and are subject to investment risk.</p>
+                        <p>EPIG is a risk-managed compounding strategy that deploys freed cash flow (from tax savings + reserves) into diversified investments. <strong>Illustrative return scenarios:</strong> Conservative 5%, Base 8%, Strong 12%. <strong>Important:</strong> These are not guarantees. Actual returns depend on market conditions and are subject to investment risk.</p>
                     </div>
                 </div>
 
@@ -2060,7 +2191,7 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
 
             <div class="disclaimer-block">
                 <h4>Investment Risk</h4>
-                <p>All investments involve risk, including the loss of principal. Past performance does not guarantee future results. The EPIG 500 return scenarios (5%, 8%, 12%) are illustrative only and not promises or forecasts. Actual returns will vary based on market conditions and individual circumstances.</p>
+                <p>All investments involve risk, including the loss of principal. Past performance does not guarantee future results. The EPIG return scenarios (5%, 8%, 12%) are illustrative only and not promises or forecasts. Actual returns will vary based on market conditions and individual circumstances.</p>
             </div>
 
             <div class="disclaimer-block">
@@ -2111,7 +2242,7 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#start">Start Here</a></li>
-                        <li><a href="#levers">3 Levers + EPIG 500</a></li>
+                        <li><a href="#levers">3 Levers + EPIG</a></li>
                         <li><a href="#master-dashboard">Master Dashboard</a></li>
                         <li><a href="#roadmap">1-Year Roadmap</a></li>
                         <li><a href="#faq">FAQ</a></li>
