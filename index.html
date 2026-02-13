@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/hero-cleaner.css">
     <link rel="stylesheet" href="css/credibility-faq-clean.css">
     <link rel="stylesheet" href="css/contact-options.css">
+    <link rel="stylesheet" href="css/calculator-enhancements.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -170,7 +171,7 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h4>831(b) Captive</h4>
-                        <p class="lever-compact-desc">Tax-efficient reserves up to $2.8M annually</p>
+                        <p class="lever-compact-desc">Tax-efficient reserves up to $2.9M annually (2026; inflation-adjusted)</p>
                         <a href="#831b-calculator" class="btn-link">Model <i class="fas fa-arrow-right"></i></a>
                     </div>
                     <div class="power-line power-line-left"></div>
@@ -339,6 +340,10 @@
                     <div class="calc-outputs">
                         <h4>Projected Outcomes</h4>
                         
+                        <div class="calculator-disclaimer">
+                            <strong>Illustrative planning estimate only.</strong> Not tax, legal, or investment advice. Results depend on plan design, underwriting, fees, and your specific facts. Consult your CPA and attorney.
+                        </div>
+                        
                         <div class="output-card output-card-primary">
                             <div class="output-label">Estimated Annual Contribution Range</div>
                             <div class="output-value" id="db-contribution-range">$120,000 - $180,000</div>
@@ -370,6 +375,53 @@
                             <i class="fas fa-exclamation-triangle"></i>
                             <p><strong>Compliance Reminder:</strong> DB Plan contributions are determined by a licensed actuary based on actuarial assumptions, age, income, plan design, and IRS rules. This calculator provides directional estimates only and is not a substitute for professional actuarial analysis.</p>
                         </div>
+                        
+                        <!-- Assumptions Drawer -->
+                        <div class="assumptions-drawer" id="db-assumptions-drawer">
+                            <div class="assumptions-header" onclick="toggleAssumptions('db-assumptions-drawer')">
+                                <h5><i class="fas fa-info-circle"></i> Assumptions + What This Excludes</h5>
+                                <span class="assumptions-toggle"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="assumptions-content">
+                                <div class="assumptions-body">
+                                    <div class="assumptions-section">
+                                        <h6>Inputs Used (Default Values)</h6>
+                                        <ul>
+                                            <li>Current Age: 50</li>
+                                            <li>Annual Income (SDE): $500,000</li>
+                                            <li>Target Contribution: $150,000</li>
+                                            <li>Effective Tax Rate: 38%</li>
+                                            <li>Years to Retirement: 10</li>
+                                            <li>Investment Return: 8% annual (EPIG 500 base case)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="assumptions-section">
+                                        <h6>Formulas</h6>
+                                        <ul>
+                                            <li><code>Contribution Range</code> = Target × (0.8 to 1.2)</li>
+                                            <li><code>Tax Savings</code> = Contribution × Tax Rate</li>
+                                            <li><code>Net Out-of-Pocket</code> = Contribution − Tax Savings (pairwise)</li>
+                                            <li><code>10-Year Accumulation</code> = FV of annual contributions at return rate</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="assumptions-section">
+                                        <h6>What This Excludes</h6>
+                                        <ul>
+                                            <li><strong>Actuary & TPA fees</strong> ($3K–$10K+ annually depending on plan complexity)</li>
+                                            <li><strong>Required employee contributions</strong> (if you have W-2 employees; varies by plan design)</li>
+                                            <li><strong>PBGC premiums</strong> (small annual insurance fee)</li>
+                                            <li><strong>Plan administration costs</strong> (recordkeeping, compliance testing)</li>
+                                            <li><strong>Investment management fees</strong> (if using managed portfolios)</li>
+                                            <li><strong>Market volatility</strong> (return rate is illustrative; actual returns vary)</li>
+                                            <li><strong>Tax law changes</strong> (rules and limits can change)</li>
+                                            <li><strong>Early termination costs</strong> (if you close plan before full funding)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -386,14 +438,14 @@
                 </div>
                 <h2>831(b) Captive Insurance: Build Tax-Efficient Reserves</h2>
                 <p class="module-intro">
-                    An 831(b) microcaptive insurance company allows you to pay deductible premiums (up to $2.8M annually if eligible) into your own insurance entity, where reserves grow tax-deferred. <strong>Critical:</strong> This structure requires proper risk distribution, underwriting, and documentation—it's not for everyone.
+                    An 831(b) microcaptive insurance company allows you to pay premiums (up to $2.9M annually for 2026; inflation-adjusted) into your own insurance entity. <strong>Important:</strong> Inside the captive, underwriting results may be treated differently under 831(b); investment income can still be taxable. Premium deductibility depends on proper structure and facts; consult your CPA/attorney. This structure requires proper risk distribution, underwriting, and documentation—it's not for everyone.
                 </p>
             </div>
 
             <div class="explainer-grid">
                 <div class="explainer-card">
                     <h3>What It Is</h3>
-                    <p>An 831(b) captive is a small insurance company you own that provides coverage for your business's unique risks. Premiums paid to the captive may be tax-deductible (if properly structured), and reserves grow tax-deferred inside the captive.</p>
+                    <p>An 831(b) captive is a small insurance company you own that provides coverage for your business's unique risks. Inside the captive, underwriting results may be treated differently under 831(b); investment income can still be taxable. Premium deductibility depends on proper structure and facts\u2014consult your CPA/attorney.</p>
                 </div>
                 <div class="explainer-card">
                     <h3>Why It Matters</h3>
@@ -425,7 +477,7 @@
                                 <span class="prefix">$</span>
                                 <input type="number" id="b831-premium" value="250000" step="10000" min="0">
                             </div>
-                            <span class="input-hint">Typical range: $100K - $2.8M (if eligible)</span>
+                            <span class="input-hint">Typical range: $100K - $2.9M (2026 limit; confirm current year)</span>
                         </div>
 
                         <div class="input-group">
@@ -469,6 +521,15 @@
                             <span class="input-hint">Illustrative tax benefit if premium is deductible</span>
                         </div>
 
+                        <div class="input-group">
+                            <label for="b831-overhead">Monthly Practice Overhead</label>
+                            <div class="input-with-prefix">
+                                <span class="prefix">$</span>
+                                <input type="number" id="b831-overhead" value="80000" step="5000" min="0">
+                            </div>
+                            <span class="input-hint">Fixed monthly expenses (payroll, rent, insurance, etc.)</span>
+                        </div>
+
                         <button class="btn btn-secondary btn-block" onclick="calculate831b()">
                             <i class="fas fa-calculator"></i> Calculate
                         </button>
@@ -477,6 +538,10 @@
                     <!-- Right: Outputs -->
                     <div class="calc-outputs">
                         <h4>Projected Outcomes</h4>
+                        
+                        <div class="calculator-disclaimer">
+                            <strong>Illustrative planning estimate only.</strong> Not tax, legal, or investment advice. Results depend on proper structure, underwriting, risk distribution, and your specific facts. Premium deductibility and tax treatment vary. Consult your CPA and attorney.
+                        </div>
                         
                         <div class="output-card output-card-primary">
                             <div class="output-label">Year-1 Illustrative Tax Effect (if Deductible)</div>
@@ -491,7 +556,7 @@
                         </div>
 
                         <div class="output-card output-card-highlight">
-                            <div class="output-label">10-Year Reserve Pool (Tax-Deferred)</div>
+                            <div class="output-label">10-Year Reserve Pool</div>
                             <div class="output-value" id="b831-reserve-pool">$2,500,000</div>
                             <div class="output-note">Illustrative—assumes consistent premiums + 5% growth</div>
                         </div>
@@ -508,6 +573,60 @@
                         <div class="compliance-note">
                             <i class="fas fa-exclamation-triangle"></i>
                             <p><strong>Compliance Reminder:</strong> An 831(b) captive requires risk distribution, proper underwriting, arm's-length transactions, and comprehensive documentation. Tax treatment depends on IRS compliance. Not all businesses qualify. This calculator is illustrative only—consult legal and tax advisors before proceeding.</p>
+                        </div>
+                        
+                        <!-- Assumptions Drawer -->
+                        <div class="assumptions-drawer" id="b831-assumptions-drawer">
+                            <div class="assumptions-header" onclick="toggleAssumptions('b831-assumptions-drawer')">
+                                <h5><i class="fas fa-info-circle"></i> Assumptions + What This Excludes</h5>
+                                <span class="assumptions-toggle"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="assumptions-content">
+                                <div class="assumptions-body">
+                                    <div class="assumptions-section">
+                                        <h6>Inputs Used (Default Values)</h6>
+                                        <ul>
+                                            <li>Annual Premium: $250,000</li>
+                                            <li>Admin/Formation Costs: $25,000</li>
+                                            <li>Reserve Investment Return: 5% annual</li>
+                                            <li>Years to Project: 10</li>
+                                            <li>Claims Scenario: Low (10% payout)</li>
+                                            <li>Effective Tax Rate: 38% (if premium deductible)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="assumptions-section">
+                                        <h6>Formulas</h6>
+                                        <ul>
+                                            <li><code>Year-1 Tax Effect</code> = Premium × Tax Rate (if deductible)</li>
+                                            <li><code>Net Reserve (Year 1)</code> = Premium − Admin − Claims</li>
+                                            <li><code>Reserve Pool (10-Year)</code> = FV of net reserves at return rate</li>
+                                            <li><code>Months of Coverage</code> = Reserve Pool ÷ Monthly Overhead</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="assumptions-section">
+                                        <h6>What This Excludes</h6>
+                                        <ul>
+                                            <li><strong>Captive formation costs</strong> ($10K–$50K+ setup; legal, filing, state fees)</li>
+                                            <li><strong>Ongoing captive management</strong> (captive manager fees, compliance)</li>
+                                            <li><strong>Actuarial & underwriting fees</strong> (risk analysis, pricing studies)</li>
+                                            <li><strong>Fronting carrier fees</strong> (if using fronting arrangement)</li>
+                                            <li><strong>Reinsurance costs</strong> (if reinsuring excess risk)</li>
+                                            <li><strong>State regulatory fees & taxes</strong> (domicile-dependent)</li>
+                                            <li><strong>Legal/tax counsel</strong> (annual compliance review)</li>
+                                            <li><strong>IRS scrutiny risk</strong> (831(b) structures face heightened audit risk)</li>
+                                            <li><strong>Distribution requirements</strong> (risk must be distributed; single-insured captives scrutinized)</li>
+                                            <li><strong>Investment taxes</strong> (investment income can be taxable even in 831(b))</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="compliance-reality-box">
+                                        <h6><span class="box-icon">⚠️</span> Compliance Reality Check</h6>
+                                        <p>Micro-captive structures are complex and have IRS scrutiny in certain configurations. Proper risk distribution, underwriting, documentation, and reporting matter. Always work with qualified captive counsel + CPA. Listed transactions and abusive arrangements are subject to severe penalties.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -657,6 +776,10 @@
                     <div class="calc-outputs">
                         <h4>Retention ROI + Leverage Analysis</h4>
                         
+                        <div class="calculator-disclaimer">
+                            <strong>Illustrative planning estimate only.</strong> Not tax, legal, or investment advice. SERP design, tax treatment, and policy loan terms vary by structure and carrier. Policy loan leverage involves risks. EPIG returns not guaranteed. Consult your legal, tax, and financial advisors.
+                        </div>
+                        
                         <div class="output-card output-card-primary">
                             <div class="output-label">Estimated Cost of Loss (One-Time)</div>
                             <div class="output-value" id="serp-cost-loss">$450,000</div>
@@ -743,6 +866,59 @@
                         <div class="compliance-note">
                             <i class="fas fa-exclamation-triangle"></i>
                             <p><strong>Compliance Reminder:</strong> SERPs are non-qualified deferred compensation plans subject to IRC §409A and other rules. Design, funding, and tax treatment vary significantly. <strong>Policy Loan Leverage:</strong> Borrowing against life insurance cash value involves risks—loan interest accumulates, and if not repaid, can reduce death benefit or cause policy lapse. EPIG 500 returns are not guaranteed and may be negative. The spread between loan rate and investment returns is illustrative only. Consult legal, tax, and financial advisors before implementing.</p>
+                        </div>
+                        
+                        <!-- Assumptions Drawer -->
+                        <div class="assumptions-drawer" id="serp-assumptions-drawer">
+                            <div class="assumptions-header" onclick="toggleAssumptions('serp-assumptions-drawer')">
+                                <h5><i class="fas fa-info-circle"></i> Assumptions + What This Excludes</h5>
+                                <span class="assumptions-toggle"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="assumptions-content">
+                                <div class="assumptions-body">
+                                    <div class="assumptions-section">
+                                        <h6>Inputs Used (Default Values)</h6>
+                                        <ul>
+                                            <li>Key Employee Compensation: $150,000</li>
+                                            <li>Replacement Cost Multiplier: 3x (Typical)</li>
+                                            <li>Annual SERP Funding: $25,000</li>
+                                            <li>Vesting Period: 7 years</li>
+                                            <li>Departure Probability Reduction: 50%</li>
+                                            <li>Policy Loan Rate: 5.5% (if leverage enabled)</li>
+                                            <li>EPIG 500 Target Return: 8% (if leverage enabled)</li>
+                                            <li>Leverage Time Horizon: 10 years (if enabled)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="assumptions-section">
+                                        <h6>Formulas</h6>
+                                        <ul>
+                                            <li><code>Cost of Loss</code> = Compensation × Replacement Multiplier</li>
+                                            <li><code>Total SERP Investment</code> = Annual Funding × Vesting Years</li>
+                                            <li><code>Value Protected</code> = Cost of Loss × Departure Reduction %</li>
+                                            <li><code>Leverage Net Gain</code> = (EPIG Return − Loan Rate) × Borrowed Capital × Years</li>
+                                            <li><code>Total Value</code> = Value Protected + Leverage Net Gain</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="assumptions-section">
+                                        <h6>What This Excludes</h6>
+                                        <ul>
+                                            <li><strong>Plan design & documentation costs</strong> ($5K–$15K setup; attorney fees)</li>
+                                            <li><strong>Annual plan administration</strong> (compliance, tax reporting)</li>
+                                            <li><strong>Life insurance policy charges</strong> (COI, admin fees, surrender charges)</li>
+                                            <li><strong>Policy loan interest accumulation</strong> (interest compounds if not paid)</li>
+                                            <li><strong>Death benefit reduction</strong> (loans reduce payout if not repaid)</li>
+                                            <li><strong>Policy lapse risk</strong> (insufficient cash value to cover loans + charges)</li>
+                                            <li><strong>EPIG 500 management fee</strong> (1% AUM charged quarterly)</li>
+                                            <li><strong>Market volatility</strong> (EPIG returns are illustrative; actual returns vary)</li>
+                                            <li><strong>§409A compliance costs</strong> (documentation, ongoing monitoring)</li>
+                                            <li><strong>Alternative employee retention strategies</strong> (equity, bonuses, culture)</li>
+                                            <li><strong>Actual departure probability</strong> (varies by individual, market, culture)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1054,6 +1230,10 @@
                     <div class="calc-outputs">
                         <h4>10-Year Retirement Supercharger Outcomes</h4>
                         
+                        <div class="calculator-disclaimer">
+                            <strong>Illustrative planning estimate only.</strong> Not tax, legal, or investment advice. Results depend on eligibility, plan design, IRS/DOL compliance, market performance, and your specific circumstances. Projections are not guarantees. Consult CPA, attorney, and actuary.
+                        </div>
+                        
                         <div class="output-summary-grid">
                             <div class="output-card output-card-primary">
                                 <div class="output-label">Total Tax Savings (10 Years)</div>
@@ -1172,6 +1352,67 @@ Multiplier = Net Value Created ÷ Cumulative Tax Saved
                         <div class="compliance-note">
                             <i class="fas fa-exclamation-triangle"></i>
                             <p><strong>Compliance Reminder:</strong> All projections are illustrative and depend on eligibility, plan design, compliance with IRS/DOL rules, market performance, and individual circumstances. This is not a guarantee of results. Consult licensed professionals (CPA, attorney, actuary) before implementing any strategy.</p>
+                        </div>
+                        
+                        <!-- Assumptions Drawer -->
+                        <div class="assumptions-drawer" id="master-assumptions-drawer">
+                            <div class="assumptions-header" onclick="toggleAssumptions('master-assumptions-drawer')">
+                                <h5><i class="fas fa-info-circle"></i> Assumptions + What This Excludes</h5>
+                                <span class="assumptions-toggle"><i class="fas fa-chevron-down"></i></span>
+                            </div>
+                            <div class="assumptions-content">
+                                <div class="assumptions-body">
+                                    <div class="assumptions-section">
+                                        <h6>Inputs Used (Default Values)</h6>
+                                        <ul>
+                                            <li>Annual SDE: $500,000</li>
+                                            <li>Effective Tax Rate: 38%</li>
+                                            <li>Years to Project: 10</li>
+                                            <li>DB Plan Contribution: $150,000 annually</li>
+                                            <li>831(b) Premium: Not enabled (optional)</li>
+                                            <li>SERP Funding: $25,000 annually</li>
+                                            <li>EPIG 500 Return: 8% (Base case)</li>
+                                            <li>Exit Valuation Multiple: 3.5x SDE</li>
+                                            <li>Reinvestment Efficiency: 75%</li>
+                                            <li>ECA Advisory Fee: User input required (no default)</li>
+                                            <li>Setup Costs: $10,000 one-time</li>
+                                            <li>Third-Party Costs: $15,000 annually</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="assumptions-section">
+                                        <h6>Formulas</h6>
+                                        <ul>
+                                            <li><code>Total Tax Savings</code> = Sum of annual tax reductions from DB + 831(b)</li>
+                                            <li><code>Retirement Accumulation</code> = FV(DB contributions + SERP) at EPIG return</li>
+                                            <li><code>Reserve Pool</code> = FV(831(b) net reserves) at reserve return</li>
+                                            <li><code>Invested Portion</code> = (Tax Savings × Reinvest %) compounded at EPIG return</li>
+                                            <li><code>Exit Uplift</code> = (Incremental SDE from reserves/SERP) × Exit Multiple</li>
+                                            <li><code>Net Costs</code> = Setup + (Annual Fees × Years)</li>
+                                            <li><code>Net Value</code> = Invested + Reserves + Retirement + Exit Uplift − Net Costs</li>
+                                            <li><code>Tax Savings Multiplier</code> = Net Value ÷ Total Tax Saved</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="assumptions-section">
+                                        <h6>What This Excludes</h6>
+                                        <ul>
+                                            <li><strong>Market volatility & downside risk</strong> (EPIG returns are illustrative)</li>
+                                            <li><strong>Individual strategy costs</strong> (DB Plan setup, 831(b) formation, SERP docs)</li>
+                                            <li><strong>Annual compliance & audit costs</strong> (plan audits, tax filings, legal reviews)</li>
+                                            <li><strong>Employee costs for DB Plan</strong> (varies by demographics and plan design)</li>
+                                            <li><strong>PBGC premiums & other regulatory fees</strong></li>
+                                            <li><strong>State and local taxes</strong> (model uses effective federal rate only)</li>
+                                            <li><strong>Alternative investment opportunities</strong> (opportunity cost of capital)</li>
+                                            <li><strong>Business performance changes</strong> (model assumes stable SDE)</li>
+                                            <li><strong>Tax law changes</strong> (current rules may change)</li>
+                                            <li><strong>Exit timing & market conditions</strong> (exit multiple is illustrative)</li>
+                                            <li><strong>Inflation</strong> (all figures in nominal dollars)</li>
+                                            <li><strong>Time value of advisor attention</strong> (implementation & monitoring time)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
