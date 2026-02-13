@@ -106,9 +106,11 @@ function calculateDB() {
     const taxSavingsLow = contribLow * taxRate;
     const taxSavingsHigh = contribHigh * taxRate;
 
-    // Calculate net out-of-pocket range
-    const netCostLow = contribLow - taxSavingsHigh;
-    const netCostHigh = contribHigh - taxSavingsLow;
+    // Calculate net out-of-pocket range (FIXED: pairwise computation)
+    // Low scenario: low contribution - low tax savings
+    // High scenario: high contribution - high tax savings
+    const netCostLow = contribLow - taxSavingsLow;
+    const netCostHigh = contribHigh - taxSavingsHigh;
 
     // Calculate 10-year accumulation (using mid-point contribution)
     const avgContrib = target;
@@ -167,9 +169,10 @@ function calculate831b() {
     const years = parseInt(document.getElementById('b831-years').value);
     const claimsScenario = document.getElementById('b831-claims').value;
     const taxRate = parseFloat(document.getElementById('b831-taxrate').value) / 100;
+    const monthlyOverhead = parseFloat(document.getElementById('b831-overhead').value);
 
     // Validate inputs
-    if (isNaN(premium) || isNaN(admin) || isNaN(returnRate) || isNaN(years) || isNaN(taxRate)) {
+    if (isNaN(premium) || isNaN(admin) || isNaN(returnRate) || isNaN(years) || isNaN(taxRate) || isNaN(monthlyOverhead)) {
         alert('Please fill in all fields with valid numbers.');
         return;
     }
@@ -191,9 +194,8 @@ function calculate831b() {
         reservePool = (reservePool + netReserve) * (1 + returnRate);
     }
 
-    // Shock resistance calculation (months of SDE at $500K)
-    const monthlyBurn = 500000 / 12;
-    const monthsCovered = Math.floor(reservePool / monthlyBurn);
+    // Shock resistance calculation (using actual monthly overhead input)
+    const monthsCovered = Math.floor(reservePool / monthlyOverhead);
 
     // Update outputs
     document.getElementById('b831-tax-effect').textContent = formatCurrency(taxEffect);
@@ -202,9 +204,9 @@ function calculate831b() {
     
     let shockMessage = '';
     if (monthsCovered >= 12) {
-        shockMessage = `Your practice can absorb ${monthsCovered}+ months of disruption`;
+        shockMessage = `Reserve pool covers ~${monthsCovered} months of overhead`;
     } else if (monthsCovered >= 6) {
-        shockMessage = `You have ${monthsCovered} months of reserve runway`;
+        shockMessage = `Reserve pool covers ~${monthsCovered} months of overhead`;
     } else {
         shockMessage = `Consider increasing reserves for stronger protection`;
     }
@@ -702,6 +704,24 @@ function toggleFAQ(element) {
         answer.style.display = 'block';
         icon.classList.remove('fa-chevron-down');
         icon.classList.add('fa-chevron-up');
+    }
+}
+
+// ========================================
+// ASSUMPTIONS DRAWER TOGGLE
+// ========================================
+
+function toggleAssumptions(drawerId) {
+    const drawer = document.getElementById(drawerId);
+    const content = drawer.querySelector('.assumptions-content');
+    const toggle = drawer.querySelector('.assumptions-toggle');
+    
+    if (content.classList.contains('open')) {
+        content.classList.remove('open');
+        toggle.classList.remove('open');
+    } else {
+        content.classList.add('open');
+        toggle.classList.add('open');
     }
 }
 
