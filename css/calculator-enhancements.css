@@ -1,0 +1,165 @@
+/* =====================================================
+   CALCULATOR DISCLAIMER BANNERS
+   Trust-first compliance messaging
+   ===================================================== */
+
+.calculator-disclaimer {
+    background: rgba(245, 166, 35, 0.1);
+    border-left: 3px solid var(--color-primary);
+    padding: 0.75rem 1rem;
+    margin: 1rem 0 1.5rem 0;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
+
+.calculator-disclaimer strong {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Assumptions Drawer */
+.assumptions-drawer {
+    margin-top: 2rem;
+    border: 1px solid rgba(245, 166, 35, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--color-dark-secondary);
+}
+
+.assumptions-header {
+    padding: 1rem 1.25rem;
+    background: rgba(245, 166, 35, 0.1);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s ease;
+    user-select: none;
+}
+
+.assumptions-header:hover {
+    background: rgba(245, 166, 35, 0.15);
+}
+
+.assumptions-header h5 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.assumptions-toggle {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+}
+
+.assumptions-toggle.open {
+    transform: rotate(180deg);
+}
+
+.assumptions-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.assumptions-content.open {
+    max-height: 1000px;
+}
+
+.assumptions-body {
+    padding: 1.5rem 1.25rem;
+}
+
+.assumptions-section {
+    margin-bottom: 1.25rem;
+}
+
+.assumptions-section:last-child {
+    margin-bottom: 0;
+}
+
+.assumptions-section h6 {
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.assumptions-section ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+}
+
+.assumptions-section li {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.35rem;
+}
+
+.assumptions-section li:last-child {
+    margin-bottom: 0;
+}
+
+.assumptions-section li code {
+    background: rgba(245, 166, 35, 0.15);
+    padding: 0.125rem 0.35rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    color: var(--color-primary);
+}
+
+/* Compliance Reality Box */
+.compliance-reality-box {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.compliance-reality-box .box-icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 1.125rem;
+    color: #ffc107;
+}
+
+.compliance-reality-box h6 {
+    display: inline;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.compliance-reality-box p {
+    margin: 0.75rem 0 0 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .calculator-disclaimer {
+        font-size: 0.8125rem;
+        padding: 0.625rem 0.875rem;
+    }
+    
+    .assumptions-header {
+        padding: 0.875rem 1rem;
+    }
+    
+    .assumptions-body {
+        padding: 1.25rem 1rem;
+    }
+}
