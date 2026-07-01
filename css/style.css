@@ -1,34 +1,36 @@
 /* =====================================================
    EKANTIK CAPITAL ADVISORS - FOUNDING MEMBER LANDING PAGE
-   Color Scheme: Orange/Gold header, Dark backgrounds, Gold accents
+   Brand: Navy + Gold signature palette on a deep navy canvas.
+   Signal Red reserved exclusively for "closing soon" urgency.
    ===================================================== */
 
 /* =====================================================
    ROOT VARIABLES
    ===================================================== */
 :root {
-    /* Primary Colors (from reference design) */
-    --color-orange: #f5a623;
-    --color-orange-light: #fbb040;
-    --color-gold: #d4a017;
-    --color-gold-light: #e8b84c;
-    
-    /* Dark Theme */
-    --color-dark-primary: #0a0e1a;
-    --color-dark-secondary: #141924;
-    --color-dark-tertiary: #1e2533;
-    --color-dark-card: #242b3d;
-    
+    /* Signature Gold accents (brand gold #C8A951) */
+    --color-orange: #d4af5a;
+    --color-orange-light: #e6c983;
+    --color-gold: #c8a951;
+    --color-gold-light: #dec170;
+    --color-primary: #c8a951;
+
+    /* Navy Canvas (brand navy family) */
+    --color-dark-primary: #0c1428;
+    --color-dark-secondary: #141f38;
+    --color-dark-tertiary: #1b2a4a;
+    --color-dark-card: #24365c;
+
     /* Text Colors */
     --color-text-primary: #ffffff;
-    --color-text-secondary: #b8c1d9;
-    --color-text-muted: #7d8ba6;
-    
+    --color-text-secondary: #c3ccde;
+    --color-text-muted: #8794ac;
+
     /* Accent Colors */
     --color-accent-blue: #4a90e2;
     --color-accent-green: #4caf50;
-    --color-accent-red: #e74c3c;
-    
+    --color-accent-red: #dc2626;
+
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
@@ -38,7 +40,8 @@
     --spacing-xxl: 6rem;
     
     /* Typography */
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
     --font-weight-light: 300;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
@@ -137,18 +140,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 3rem;
-    font-weight: var(--font-weight-extrabold);
+    font-family: var(--font-display);
+    font-size: 3.25rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.01em;
     line-height: 1.1;
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-family: var(--font-display);
+    font-size: 2.75rem;
     font-weight: var(--font-weight-bold);
+    letter-spacing: -0.01em;
 }
 
 h3 {
-    font-size: 1.75rem;
+    font-family: var(--font-display);
+    font-size: 1.9rem;
     font-weight: var(--font-weight-semibold);
 }
 
@@ -209,12 +217,12 @@ p {
 .btn-primary {
     background: linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange-light) 100%);
     color: var(--color-dark-primary);
-    box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+    box-shadow: 0 4px 12px rgba(200, 169, 81, 0.3);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+    box-shadow: 0 6px 20px rgba(200, 169, 81, 0.4);
 }
 
 .btn-secondary {
@@ -400,7 +408,7 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(245, 166, 35, 0.05) 0%, transparent 50%);
+    background: radial-gradient(circle at 20% 50%, rgba(200, 169, 81, 0.05) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -657,7 +665,7 @@ p {
 }
 
 .compliance-note {
-    background: rgba(245, 166, 35, 0.1);
+    background: rgba(200, 169, 81, 0.1);
     border: 1px solid var(--color-orange);
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
@@ -937,11 +945,11 @@ p {
 
 .cost-card:hover {
     border-color: var(--color-accent-red);
-    box-shadow: 0 8px 32px rgba(231, 76, 60, 0.2);
+    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.2);
 }
 
 .cost-icon {
-    background: rgba(231, 76, 60, 0.15);
+    background: rgba(220, 38, 38, 0.15);
     width: 60px;
     height: 60px;
     display: flex;
@@ -1137,7 +1145,7 @@ p {
 }
 
 .compliance-warning {
-    background: rgba(245, 166, 35, 0.1);
+    background: rgba(200, 169, 81, 0.1);
     border: 1px solid var(--color-orange);
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
@@ -1245,7 +1253,7 @@ p {
 }
 
 .careful-language {
-    background: rgba(245, 166, 35, 0.1);
+    background: rgba(200, 169, 81, 0.1);
     border: 1px solid var(--color-orange);
     padding: var(--spacing-sm);
     border-radius: var(--radius-md);
@@ -1362,7 +1370,7 @@ p {
 }
 
 .design-note {
-    background: rgba(245, 166, 35, 0.1);
+    background: rgba(200, 169, 81, 0.1);
     border: 1px solid var(--color-orange);
     padding: var(--spacing-sm);
     border-radius: var(--radius-md);
@@ -1530,7 +1538,7 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(245, 166, 35, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(200, 169, 81, 0.1) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -1542,7 +1550,7 @@ p {
     text-align: center;
     position: relative;
     z-index: 1;
-    box-shadow: 0 8px 32px rgba(212, 160, 23, 0.3);
+    box-shadow: 0 8px 32px rgba(200, 169, 81, 0.3);
 }
 
 .calculator-cta-card h2 {

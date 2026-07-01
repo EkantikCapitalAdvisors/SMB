@@ -25,14 +25,14 @@
     gap: var(--spacing-md);
     padding: var(--spacing-md);
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(245, 166, 35, 0.2);
+    border: 1px solid rgba(200, 169, 81, 0.2);
     border-radius: var(--radius-md);
     transition: all var(--transition-normal);
 }
 
 .hero-lever-item:hover {
     border-color: var(--color-orange);
-    background: rgba(245, 166, 35, 0.05);
+    background: rgba(200, 169, 81, 0.05);
     transform: translateX(4px);
 }
 
@@ -71,12 +71,12 @@
 /* Secondary Outline Button (for hero) */
 .btn-secondary-outline.btn-lg {
     background: transparent;
-    border: 2px solid rgba(245, 166, 35, 0.5);
+    border: 2px solid rgba(200, 169, 81, 0.5);
     color: var(--color-orange);
 }
 
 .btn-secondary-outline.btn-lg:hover {
-    background: rgba(245, 166, 35, 0.1);
+    background: rgba(200, 169, 81, 0.1);
     border-color: var(--color-orange);
     transform: translateY(-2px);
 }

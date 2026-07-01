@@ -189,8 +189,8 @@ function calculateDB() {
         datasets: [{
             label: 'Projected Accumulation',
             data: [],
-            borderColor: '#f5a623',
-            backgroundColor: 'rgba(245, 166, 35, 0.1)',
+            borderColor: '#c8a951',
+            backgroundColor: 'rgba(200, 169, 81, 0.1)',
             fill: true,
             tension: 0.4
         }]
@@ -423,8 +423,8 @@ function calculateSERP() {
             {
                 label: 'SERP Cost (Cumulative)',
                 data: [],
-                borderColor: '#e74c3c',
-                backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                borderColor: '#dc2626',
+                backgroundColor: 'rgba(220, 38, 38, 0.1)',
                 fill: true,
                 tension: 0.4
             },
@@ -554,16 +554,16 @@ function calculateMaster() {
             {
                 label: 'Low Scenario (5% EPIG)',
                 data: [],
-                borderColor: 'rgba(231, 76, 60, 0.8)',
-                backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                borderColor: 'rgba(220, 38, 38, 0.8)',
+                backgroundColor: 'rgba(220, 38, 38, 0.1)',
                 fill: false,
                 tension: 0.4
             },
             {
                 label: 'Base Scenario (8% EPIG)',
                 data: [],
-                borderColor: '#f5a623',
-                backgroundColor: 'rgba(245, 166, 35, 0.1)',
+                borderColor: '#c8a951',
+                backgroundColor: 'rgba(200, 169, 81, 0.1)',
                 fill: true,
                 tension: 0.4,
                 borderWidth: 3
@@ -661,7 +661,7 @@ function renderChart(canvasId, data, title, isMultiScenario = false) {
             scales: {
                 x: {
                     ticks: {
-                        color: '#b8c1d9'
+                        color: '#c3ccde'
                     },
                     grid: {
                         color: 'rgba(255, 255, 255, 0.1)'
@@ -669,7 +669,7 @@ function renderChart(canvasId, data, title, isMultiScenario = false) {
                 },
                 y: {
                     ticks: {
-                        color: '#b8c1d9',
+                        color: '#c3ccde',
                         callback: function(value) {
                             return formatCurrency(value);
                         }

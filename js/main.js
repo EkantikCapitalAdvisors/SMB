@@ -190,7 +190,7 @@ function showFormMessage(type, message) {
         messageDiv.style.color = 'var(--color-accent-green)';
         messageDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
     } else {
-        messageDiv.style.backgroundColor = 'rgba(231, 76, 60, 0.15)';
+        messageDiv.style.backgroundColor = 'rgba(220, 38, 38, 0.15)';
         messageDiv.style.border = '2px solid var(--color-accent-red)';
         messageDiv.style.color = 'var(--color-accent-red)';
         messageDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
@@ -511,9 +511,9 @@ if (mobileMenuToggle && navMenu) {
 // =====================================================
 // CONSOLE BRANDING
 // =====================================================
-console.log('%c Ekantik Capital Advisors ', 'background: linear-gradient(135deg, #f5a623 0%, #d4a017 100%); color: #0a0e1a; font-size: 16px; font-weight: bold; padding: 10px 20px;');
-console.log('%c Guardrailed Buy, Borrow & Die ', 'color: #d4a017; font-size: 12px; font-weight: bold;');
-console.log('%c Founding Member Cohort Now Open ', 'color: #b8c1d9; font-size: 11px;');
+console.log('%c Ekantik Capital Advisors ', 'background: linear-gradient(135deg, #c8a951 0%, #b6963f 100%); color: #0c1428; font-size: 16px; font-weight: bold; padding: 10px 20px;');
+console.log('%c Guardrailed Buy, Borrow & Die ', 'color: #b6963f; font-size: 12px; font-weight: bold;');
+console.log('%c Founding Member Cohort Now Open ', 'color: #c3ccde; font-size: 11px;');
 
 // =====================================================
 // EXPORT FOR TESTING

@@ -38,7 +38,7 @@
 .timeline-phase-card {
     background: var(--color-dark-card);
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(245, 166, 35, 0.2);
+    border: 1px solid rgba(200, 169, 81, 0.2);
     overflow: hidden;
     transition: all var(--transition-normal);
     position: relative;
@@ -47,7 +47,7 @@
 .timeline-phase-card:hover {
     border-color: var(--color-orange);
     transform: translateX(8px);
-    box-shadow: 0 12px 40px rgba(245, 166, 35, 0.25);
+    box-shadow: 0 12px 40px rgba(200, 169, 81, 0.25);
 }
 
 /* Phase Header */
@@ -56,8 +56,8 @@
     align-items: center;
     gap: var(--spacing-md);
     padding: var(--spacing-lg);
-    background: rgba(245, 166, 35, 0.05);
-    border-bottom: 1px solid rgba(245, 166, 35, 0.1);
+    background: rgba(200, 169, 81, 0.05);
+    border-bottom: 1px solid rgba(200, 169, 81, 0.1);
 }
 
 /* Phase Badge */
@@ -71,7 +71,7 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--color-orange), var(--color-gold));
-    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.4);
+    box-shadow: 0 8px 24px rgba(200, 169, 81, 0.4);
     position: relative;
     z-index: 2;
 }
@@ -104,19 +104,19 @@
 
 /* Phase Badge Color Variants */
 .phase-badge-1 {
-    background: linear-gradient(135deg, #F5A623, #F4B223);
+    background: linear-gradient(135deg, #d4af5a, #c8a951);
 }
 
 .phase-badge-2 {
-    background: linear-gradient(135deg, #F4B223, #FFD700);
+    background: linear-gradient(135deg, #c8a951, #dec170);
 }
 
 .phase-badge-3 {
-    background: linear-gradient(135deg, #FFD700, #F5A623);
+    background: linear-gradient(135deg, #dec170, #d4af5a);
 }
 
 .phase-badge-4 {
-    background: linear-gradient(135deg, #F5A623, #FF8C00);
+    background: linear-gradient(135deg, #d4af5a, #b6963f);
 }
 
 /* Phase Title */
@@ -153,15 +153,15 @@
 /* Deliverable Card */
 .deliverable-card {
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(245, 166, 35, 0.1);
+    border: 1px solid rgba(200, 169, 81, 0.1);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     transition: all var(--transition-normal);
 }
 
 .deliverable-card:hover {
-    background: rgba(245, 166, 35, 0.05);
-    border-color: rgba(245, 166, 35, 0.3);
+    background: rgba(200, 169, 81, 0.05);
+    border-color: rgba(200, 169, 81, 0.3);
     transform: translateY(-4px);
 }
 
@@ -195,8 +195,8 @@
 /* Phase Footer */
 .phase-footer {
     padding: var(--spacing-md) var(--spacing-lg);
-    background: rgba(245, 166, 35, 0.08);
-    border-top: 1px solid rgba(245, 166, 35, 0.15);
+    background: rgba(200, 169, 81, 0.08);
+    border-top: 1px solid rgba(200, 169, 81, 0.15);
 }
 
 .phase-outcome {

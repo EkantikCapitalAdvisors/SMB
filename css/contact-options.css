@@ -17,7 +17,7 @@
 /* Individual Contact Option Card */
 .contact-option {
     background: var(--color-dark-secondary);
-    border: 2px solid rgba(245, 166, 35, 0.2);
+    border: 2px solid rgba(200, 169, 81, 0.2);
     border-radius: 12px;
     padding: 3rem 2rem;
     text-align: center;
@@ -26,19 +26,19 @@
 
 .contact-option:hover {
     transform: translateY(-4px);
-    border-color: rgba(245, 166, 35, 0.5);
-    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.15);
+    border-color: rgba(200, 169, 81, 0.5);
+    box-shadow: 0 8px 24px rgba(200, 169, 81, 0.15);
 }
 
 /* Primary Option Highlight */
 .contact-option-primary {
-    background: linear-gradient(135deg, rgba(245, 166, 35, 0.1) 0%, rgba(244, 178, 35, 0.05) 100%);
-    border: 2px solid rgba(245, 166, 35, 0.4);
+    background: linear-gradient(135deg, rgba(200, 169, 81, 0.1) 0%, rgba(212, 175, 90, 0.05) 100%);
+    border: 2px solid rgba(200, 169, 81, 0.4);
 }
 
 .contact-option-primary:hover {
     border-color: var(--color-primary);
-    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.25);
+    box-shadow: 0 8px 24px rgba(200, 169, 81, 0.25);
 }
 
 /* Contact Icon */
@@ -46,7 +46,7 @@
     width: 80px;
     height: 80px;
     margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, rgba(245, 166, 35, 0.2) 0%, rgba(244, 178, 35, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(200, 169, 81, 0.2) 0%, rgba(212, 175, 90, 0.1) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -57,13 +57,13 @@
 }
 
 .contact-icon-primary {
-    background: linear-gradient(135deg, rgba(245, 166, 35, 0.3) 0%, rgba(244, 178, 35, 0.2) 100%);
-    box-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
+    background: linear-gradient(135deg, rgba(200, 169, 81, 0.3) 0%, rgba(212, 175, 90, 0.2) 100%);
+    box-shadow: 0 0 20px rgba(200, 169, 81, 0.3);
 }
 
 .contact-option:hover .contact-icon {
     transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(245, 166, 35, 0.4);
+    box-shadow: 0 0 30px rgba(200, 169, 81, 0.4);
 }
 
 /* Contact Option Title */
@@ -109,7 +109,7 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(245, 166, 35, 0.2);
+    border: 2px solid rgba(200, 169, 81, 0.2);
 }
 
 /* CTA Closing Text */
@@ -207,12 +207,12 @@
 /* Button Hover Enhancement */
 .contact-option .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+    box-shadow: 0 6px 20px rgba(200, 169, 81, 0.4);
 }
 
 .contact-option .btn-secondary:hover {
     transform: translateY(-2px);
-    background: rgba(245, 166, 35, 0.1);
+    background: rgba(200, 169, 81, 0.1);
     border-color: var(--color-primary);
     color: var(--color-primary);
 }
@@ -220,10 +220,10 @@
 /* Icon Glow Animation */
 @keyframes icon-glow {
     0%, 100% {
-        box-shadow: 0 0 20px rgba(245, 166, 35, 0.3);
+        box-shadow: 0 0 20px rgba(200, 169, 81, 0.3);
     }
     50% {
-        box-shadow: 0 0 30px rgba(245, 166, 35, 0.5);
+        box-shadow: 0 0 30px rgba(200, 169, 81, 0.5);
     }
 }
 

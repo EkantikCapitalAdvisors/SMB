@@ -19,7 +19,7 @@
 
 .credibility-card-clean {
     background: var(--color-dark-card);
-    border: 1px solid rgba(245, 166, 35, 0.2);
+    border: 1px solid rgba(200, 169, 81, 0.2);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
     text-align: center;
@@ -29,7 +29,7 @@
 .credibility-card-clean:hover {
     border-color: var(--color-orange);
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(245, 166, 35, 0.2);
+    box-shadow: 0 12px 40px rgba(200, 169, 81, 0.2);
 }
 
 .credibility-icon-clean {
@@ -43,7 +43,7 @@
     margin: 0 auto var(--spacing-md);
     font-size: 2rem;
     color: var(--color-dark-primary);
-    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.3);
+    box-shadow: 0 8px 24px rgba(200, 169, 81, 0.3);
 }
 
 .credibility-card-clean h3 {
@@ -65,8 +65,8 @@
     max-width: 800px;
     margin: 0 auto;
     padding: var(--spacing-xl);
-    background: rgba(245, 166, 35, 0.05);
-    border: 2px solid rgba(245, 166, 35, 0.2);
+    background: rgba(200, 169, 81, 0.05);
+    border: 2px solid rgba(200, 169, 81, 0.2);
     border-radius: var(--radius-lg);
     text-align: center;
 }
@@ -82,7 +82,7 @@
     font-size: 1rem;
     font-weight: var(--font-weight-bold);
     margin-bottom: var(--spacing-md);
-    box-shadow: 0 4px 16px rgba(245, 166, 35, 0.4);
+    box-shadow: 0 4px 16px rgba(200, 169, 81, 0.4);
 }
 
 .testimonial-badge i {

@@ -42,7 +42,7 @@
 /* Compact Lever Cards */
 .lever-card-compact {
     background: var(--color-dark-card);
-    border: 1px solid rgba(245, 166, 35, 0.2);
+    border: 1px solid rgba(200, 169, 81, 0.2);
     border-radius: var(--radius-lg);
     padding: var(--spacing-md);
     transition: all var(--transition-normal);
@@ -52,7 +52,7 @@
 .lever-card-compact:hover {
     transform: scale(1.05);
     border-color: var(--color-orange);
-    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.3);
+    box-shadow: 0 8px 24px rgba(200, 169, 81, 0.3);
 }
 
 .lever-icon-small {
@@ -133,11 +133,11 @@
 @keyframes pulse-glow {
     0%, 100% {
         opacity: 0.4;
-        box-shadow: 0 0 10px rgba(245, 166, 35, 0.3);
+        box-shadow: 0 0 10px rgba(200, 169, 81, 0.3);
     }
     50% {
         opacity: 0.8;
-        box-shadow: 0 0 20px rgba(245, 166, 35, 0.6);
+        box-shadow: 0 0 20px rgba(200, 169, 81, 0.6);
     }
 }
 
@@ -146,11 +146,11 @@
     position: relative;
     z-index: 10;
     width: 420px;
-    background: linear-gradient(135deg, #1e2533 0%, #2a3142 100%);
+    background: linear-gradient(135deg, #1b2a4a 0%, #24365c 100%);
     border: 3px solid var(--color-gold);
     border-radius: var(--radius-xl);
     padding: var(--spacing-lg);
-    box-shadow: 0 20px 60px rgba(245, 166, 35, 0.4);
+    box-shadow: 0 20px 60px rgba(200, 169, 81, 0.4);
     animation: float-booster 4s ease-in-out infinite;
 }
 
@@ -167,7 +167,7 @@
 .booster-glow {
     position: absolute;
     inset: -20px;
-    background: radial-gradient(circle, rgba(245, 166, 35, 0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(200, 169, 81, 0.3) 0%, transparent 70%);
     border-radius: var(--radius-xl);
     z-index: -1;
     animation: glow-pulse 3s ease-in-out infinite;
@@ -199,7 +199,7 @@
     margin: 0 auto var(--spacing-md);
     font-size: 2.5rem;
     color: var(--color-dark-primary);
-    box-shadow: 0 8px 24px rgba(245, 166, 35, 0.5);
+    box-shadow: 0 8px 24px rgba(200, 169, 81, 0.5);
 }
 
 .booster-content h3 {
@@ -277,7 +277,7 @@
     background: var(--color-orange);
     color: var(--color-dark-primary);
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(245, 166, 35, 0.3);
+    box-shadow: 0 8px 16px rgba(200, 169, 81, 0.3);
 }
 
 /* Flow Explanation */
@@ -288,9 +288,9 @@
     gap: var(--spacing-md);
     margin-top: var(--spacing-xxl);
     padding: var(--spacing-lg);
-    background: rgba(245, 166, 35, 0.05);
+    background: rgba(200, 169, 81, 0.05);
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(245, 166, 35, 0.2);
+    border: 1px solid rgba(200, 169, 81, 0.2);
 }
 
 .flow-step {
