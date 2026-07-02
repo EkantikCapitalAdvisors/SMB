@@ -267,7 +267,7 @@ function calculate831b() {
     } else if (monthsCovered >= 6) {
         shockMessage = `Reserve pool covers ~${monthsCovered} months of overhead`;
     } else {
-        shockMessage = `Consider increasing reserves for stronger protection`;
+        shockMessage = `Consider increasing reserves for a stronger buffer`;
     }
     document.getElementById('b831-shock').textContent = shockMessage;
 
