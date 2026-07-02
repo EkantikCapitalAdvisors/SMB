@@ -277,8 +277,8 @@ function calculate831b() {
         datasets: [{
             label: 'Reserve Pool Growth',
             data: [],
-            borderColor: '#4a90e2',
-            backgroundColor: 'rgba(74, 144, 226, 0.1)',
+            borderColor: '#0d9488',
+            backgroundColor: 'rgba(13, 148, 136, 0.1)',
             fill: true,
             tension: 0.4
         }]
@@ -431,8 +431,8 @@ function calculateSERP() {
             {
                 label: 'Value Protected (Cumulative)',
                 data: [],
-                borderColor: '#4caf50',
-                backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                borderColor: '#34c759',
+                backgroundColor: 'rgba(52, 199, 89, 0.1)',
                 fill: true,
                 tension: 0.4
             }
@@ -571,8 +571,8 @@ function calculateMaster() {
             {
                 label: 'High Scenario (12% EPIG)',
                 data: [],
-                borderColor: 'rgba(76, 175, 80, 0.8)',
-                backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                borderColor: 'rgba(52, 199, 89, 0.8)',
+                backgroundColor: 'rgba(52, 199, 89, 0.1)',
                 fill: false,
                 tension: 0.4
             }

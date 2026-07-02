@@ -146,7 +146,7 @@
     position: relative;
     z-index: 10;
     width: 420px;
-    background: linear-gradient(135deg, #1b2a4a 0%, #24365c 100%);
+    background: linear-gradient(135deg, #1b2a4a 0%, #1f2e4e 100%);
     border: 3px solid var(--color-gold);
     border-radius: var(--radius-xl);
     padding: var(--spacing-lg);

@@ -8,28 +8,29 @@
    ROOT VARIABLES
    ===================================================== */
 :root {
-    /* Signature Gold accents (brand gold #C8A951) */
-    --color-orange: #d4af5a;
-    --color-orange-light: #e6c983;
-    --color-gold: #c8a951;
-    --color-gold-light: #dec170;
+    /* Signature Gold — brand gold #C8A951, spent with discipline */
+    --color-orange: #c8a951;         /* gold-500 (primary accent) */
+    --color-orange-light: #d4af5a;   /* brighter gold for subtle CTA sheen */
+    --color-gold: #c8a951;           /* gold-500 */
+    --color-gold-light: #dec170;     /* light gold — emphasis highlights */
+    --color-gold-hover: #b08f3c;     /* gold-600 — hover / pressed */
     --color-primary: #c8a951;
 
-    /* Navy Canvas (brand navy family) */
-    --color-dark-primary: #0c1428;
-    --color-dark-secondary: #141f38;
-    --color-dark-tertiary: #1b2a4a;
-    --color-dark-card: #24365c;
+    /* Navy Canvas (accelerator foundation navy scale) */
+    --color-dark-primary: #10182b;   /* navy-950 — deepest background */
+    --color-dark-secondary: #131f38; /* navy-900 — panels / nav */
+    --color-dark-tertiary: #1b2a4a;  /* navy-800 — brand navy */
+    --color-dark-card: #1f2e4e;      /* raised card surface */
 
-    /* Text Colors */
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #c3ccde;
-    --color-text-muted: #8794ac;
+    /* Text — warm off-white on navy (never pure white for body) */
+    --color-text-primary: #e9e7e2;   /* text-on-dark */
+    --color-text-secondary: rgba(233, 231, 226, 0.72);
+    --color-text-muted: rgba(233, 231, 226, 0.52);
 
-    /* Accent Colors */
-    --color-accent-blue: #4a90e2;
-    --color-accent-green: #4caf50;
-    --color-accent-red: #dc2626;
+    /* Semantic accents */
+    --color-accent-blue: #0d9488;    /* teal — data / charts */
+    --color-accent-green: #34c759;   /* live status */
+    --color-accent-red: #dc2626;     /* kill / gate / urgency */
 
     /* Spacing */
     --spacing-xs: 0.5rem;
@@ -41,7 +42,8 @@
     
     /* Typography */
     --font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
     --font-weight-light: 300;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
@@ -142,9 +144,9 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-family: var(--font-display);
     font-size: 3.25rem;
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-extrabold);
     letter-spacing: -0.01em;
-    line-height: 1.1;
+    line-height: 1.04;
 }
 
 h2 {
@@ -180,6 +182,23 @@ p {
 
 .text-muted {
     color: var(--color-text-muted);
+}
+
+/* Signature mono numerals — the accelerator "data language" */
+.flow-number,
+.marker-number,
+.phase-number,
+.step-number,
+.range-value,
+.scenario-value,
+.output-value,
+.wow-value,
+.wow-value-large,
+.wow-metric-total,
+.wow-metric-multiplier {
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum" 1;
+    letter-spacing: -0.01em;
 }
 
 @media (max-width: 768px) {

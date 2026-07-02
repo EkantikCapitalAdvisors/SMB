@@ -185,7 +185,7 @@ function showFormMessage(type, message) {
     `;
     
     if (type === 'success') {
-        messageDiv.style.backgroundColor = 'rgba(76, 175, 80, 0.15)';
+        messageDiv.style.backgroundColor = 'rgba(52, 199, 89, 0.15)';
         messageDiv.style.border = '2px solid var(--color-accent-green)';
         messageDiv.style.color = 'var(--color-accent-green)';
         messageDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
@@ -511,8 +511,8 @@ if (mobileMenuToggle && navMenu) {
 // =====================================================
 // CONSOLE BRANDING
 // =====================================================
-console.log('%c Ekantik Capital Advisors ', 'background: linear-gradient(135deg, #c8a951 0%, #b6963f 100%); color: #0c1428; font-size: 16px; font-weight: bold; padding: 10px 20px;');
-console.log('%c Guardrailed Buy, Borrow & Die ', 'color: #b6963f; font-size: 12px; font-weight: bold;');
+console.log('%c Ekantik Capital Advisors ', 'background: linear-gradient(135deg, #c8a951 0%, #b08f3c 100%); color: #10182b; font-size: 16px; font-weight: bold; padding: 10px 20px;');
+console.log('%c Guardrailed Buy, Borrow & Die ', 'color: #b08f3c; font-size: 12px; font-weight: bold;');
 console.log('%c Founding Member Cohort Now Open ', 'color: #c3ccde; font-size: 11px;');
 
 // =====================================================
