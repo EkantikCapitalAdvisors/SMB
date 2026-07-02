@@ -1,0 +1,118 @@
+/* ============================================================
+   EKANTIK CAPITAL — LANDING PAGE FOUNDATION (ported verbatim)
+   Deployed reference: accelerator.ekantikcapital.com
+   ============================================================ */
+:root {
+  /* --- BRAND CORE --- */
+  --navy-950: #10182b; /* deepest background — dark sections */
+  --navy-900: #131f38; /* raised surface — cards/panels on dark */
+  --navy-800: #1b2a4a; /* brand navy — headers/cards on light, borders */
+  --gold-500: #c8a951; /* brand gold — accents ONLY (gold discipline) */
+  --gold-600: #b08f3c; /* gold hover / pressed */
+  --ivory: #faf8f5; /* light section background */
+  --white: #ffffff;
+  --slate-400: #64748b; /* muted text, captions */
+  --green-700: #2d5016; /* growth contexts only, sparing */
+
+  /* --- SEMANTIC LAYER --- */
+  --color-upside: var(--gold-500); /* earned scale, upside, primary CTA */
+  --color-data: #0d9488; /* teal — charts, neutral data, bars */
+  --color-kill: #dc2626; /* red — kill/gate/stand-down ONLY */
+  --color-live: #34c759; /* status "live/green" dot only */
+
+  /* --- TEXT --- */
+  --text-on-dark: #e9e7e2; /* body on navy — NEVER gold body */
+  --text-on-light: #1b2a4a;
+  --muted-on-dark: rgba(233, 231, 226, 0.6);
+  --muted-on-light: #64748b;
+
+  /* --- LINES / BORDERS --- */
+  --hairline-gold: rgba(200, 169, 81, 0.3);
+  --border-on-dark: rgba(233, 231, 226, 0.14);
+  --border-on-light: rgba(27, 42, 74, 0.12);
+
+  /* --- TYPE ROLES --- */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* --- TYPE SCALE (fluid) --- */
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(1.9rem, 3.4vw, 2.6rem);
+  --step-4: clamp(2.6rem, 6vw, 4.25rem);
+
+  /* --- SPACING --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2.5rem;
+  --space-7: 4rem;
+  --space-8: 6rem;
+
+  /* --- RADIUS / SHADOW / LAYOUT --- */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+  --shadow-card: 0 1px 3px rgba(16, 24, 43, 0.1), 0 10px 30px rgba(16, 24, 43, 0.08);
+  --maxw: 1120px;
+  --section-y: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.7;
+  color: var(--text-on-dark);
+  background: var(--navy-950);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.wrap {
+  width: min(100% - 2.5rem, var(--maxw));
+  margin-inline: auto;
+}
+.h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--step-4);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-3);
+  line-height: 1.1;
+}
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1;
+}
