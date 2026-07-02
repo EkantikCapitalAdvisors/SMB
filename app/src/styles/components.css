@@ -1,0 +1,138 @@
+/* ============================================================
+   COMPONENT LAYER — ported from the accelerator foundation, plus
+   calculator-specific primitives. Consumes tokens in foundation.css.
+   ============================================================ */
+
+/* --- LAYOUT --- */
+.section { padding-block: var(--section-y); }
+.section--dark { background: var(--navy-950); color: var(--text-on-dark); }
+.section--panel { background: var(--navy-900); color: var(--text-on-dark); }
+.section--light { background: var(--ivory); color: var(--text-on-light); }
+
+/* --- TYPE --- */
+.h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--step-2); line-height: 1.2; }
+.lead { font-size: var(--step-1); line-height: 1.6; max-width: 60ch; }
+.section-intro { color: var(--muted-on-dark); max-width: 68ch; margin-top: var(--space-2); }
+.section--light .section-intro { color: var(--muted-on-light); }
+.h1 em, .h2 em { font-style: italic; color: var(--gold-500); }
+
+/* --- KICKER / EYEBROW --- */
+.kicker {
+  font-family: var(--font-body); font-size: var(--step--1);
+  font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--slate-400); display: inline-flex; align-items: center; gap: .55rem;
+  margin-bottom: var(--space-4);
+}
+.kicker--gold { color: var(--gold-500); }
+.kicker__num { font-family: var(--font-mono); font-weight: 500; color: var(--gold-500); letter-spacing: 0; }
+.kicker__glyph { color: var(--gold-500); }
+
+/* --- HAIRLINE --- */
+.hairline { border: 0; border-top: 1px solid var(--hairline-gold); margin-block: var(--space-6); }
+
+/* --- BUTTONS --- */
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--font-body); font-weight: 600; font-size: var(--step-0);
+  padding: .8rem 1.5rem; border-radius: var(--radius);
+  text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn--primary { background: var(--gold-500); color: var(--navy-950); }
+.btn--primary:hover { background: var(--gold-600); }
+.btn--ghost { background: transparent; color: var(--gold-500); border-color: var(--hairline-gold); }
+.btn--ghost:hover { border-color: var(--gold-500); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* --- BADGE / PILL --- */
+.badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--font-body); font-size: var(--step--1); font-weight: 500;
+  letter-spacing: .04em; padding: .35rem .8rem; border-radius: 999px;
+  border: 1px solid var(--border-on-dark); color: var(--muted-on-dark);
+}
+.badge__dot { width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; }
+.badge--live { color: var(--color-live); border-color: rgba(52,199,89,.35); }
+.badge--gold { color: var(--gold-500); border-color: var(--hairline-gold); }
+.badge--kill { color: var(--color-kill); border-color: rgba(220,38,38,.35); }
+
+/* --- CARD --- */
+.card {
+  background: var(--navy-900); border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-lg); padding: var(--space-6);
+}
+
+/* --- STAT (mono numerals) --- */
+.stat__num {
+  font-family: var(--font-mono); font-weight: 500;
+  font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1;
+  font-feature-settings: "tnum" 1; letter-spacing: -.01em; color: var(--text-on-dark);
+}
+.stat__num--upside { color: var(--gold-500); }
+.stat__num--data { color: var(--color-data); }
+.stat__num--lost { color: var(--slate-400); }        /* §6.0 gray = money lost */
+.stat__num--kill { color: var(--color-kill); }
+.stat__label {
+  display: block; margin-top: var(--space-2);
+  font-size: var(--step--1); letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted-on-dark);
+}
+
+/* --- COMPLIANCE MICROCOPY --- */
+.legal { font-size: var(--step--1); line-height: 1.55; color: var(--muted-on-dark); max-width: 78ch; }
+.illustrative-tag {
+  display: inline-block; font-size: var(--step--1); font-weight: 600;
+  color: var(--gold-500); letter-spacing: .06em; text-transform: uppercase;
+}
+
+/* --- CALCULATOR PRIMITIVES --- */
+.calc {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-6); margin-top: var(--space-6); align-items: start;
+}
+@media (max-width: 860px) { .calc { grid-template-columns: 1fr; } }
+
+.calc__inputs, .calc__outputs { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.field { display: flex; flex-direction: column; gap: var(--space-2); }
+.field > label { font-size: var(--step--1); color: var(--muted-on-dark); display: flex; justify-content: space-between; gap: 1rem; }
+.field > label b { color: var(--text-on-dark); font-family: var(--font-mono); font-weight: 500; }
+.field input[type="range"] { width: 100%; accent-color: var(--gold-500); }
+.field select, .field input[type="number"] {
+  font-family: var(--font-body); font-size: var(--step-0);
+  background: var(--navy-950); color: var(--text-on-dark);
+  border: 1px solid var(--border-on-dark); border-radius: var(--radius); padding: .6rem .75rem;
+}
+.pillrow { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.pill {
+  font-family: var(--font-body); font-size: var(--step--1); padding: .4rem .9rem;
+  border-radius: 999px; cursor: pointer; border: 1px solid var(--border-on-dark);
+  background: transparent; color: var(--muted-on-dark);
+}
+.pill[aria-pressed="true"] { background: var(--gold-500); color: var(--navy-950); border-color: var(--gold-500); }
+.switchrow { display: flex; align-items: center; gap: var(--space-3); }
+.switchrow input { accent-color: var(--gold-500); width: 1.1rem; height: 1.1rem; }
+
+.result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-5); }
+.result { padding: var(--space-4); border: 1px solid var(--border-on-dark); border-radius: var(--radius); background: rgba(255,255,255,.02); }
+
+/* --- SHOW THE MATH (collapsible) --- */
+.drawer { border-top: 1px solid var(--border-on-dark); margin-top: var(--space-4); }
+.drawer > summary {
+  cursor: pointer; list-style: none; padding: var(--space-3) 0;
+  font-size: var(--step--1); font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--gold-500); display: flex; align-items: center; gap: .5rem;
+}
+.drawer > summary::-webkit-details-marker { display: none; }
+.drawer > summary::before { content: "▸"; transition: transform .15s ease; }
+.drawer[open] > summary::before { transform: rotate(90deg); }
+.drawer__body { font-size: var(--step--1); color: var(--muted-on-dark); line-height: 1.7; padding-bottom: var(--space-4); }
+.drawer__body code { font-family: var(--font-mono); color: var(--text-on-dark); }
+.drawer__body ul { margin-left: 1.1rem; list-style: disc; }
+
+/* --- COMPARISON TABLE --- */
+.compare { width: 100%; border-collapse: collapse; font-size: var(--step-0); }
+.compare th, .compare td { text-align: left; padding: .85rem 1rem; border-bottom: 1px solid var(--border-on-dark); }
+.compare thead th { font-weight: 600; color: var(--slate-400); font-size: var(--step--1); letter-spacing: .04em; text-transform: uppercase; }
+.compare__ours { background: rgba(200,169,81,.08); border-left: 2px solid var(--gold-500); border-right: 2px solid var(--gold-500); }
