@@ -275,6 +275,13 @@
     margin-bottom: var(--spacing-md);
 }
 
+/* De-duplicate the controls: where preset pills already drive a value, the raw
+   number field beside them is redundant and reads as unfinished. The pills set
+   (and the calculator still reads) the hidden input's value. */
+.input-group .preset-buttons + input[type="number"] {
+    display: none;
+}
+
 .input-group label {
     display: block;
     color: var(--color-text-primary);
