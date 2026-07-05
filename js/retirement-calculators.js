@@ -455,7 +455,7 @@ function calculateSERP() {
 
 let masterChart = null;
 
-function calculateMaster() {
+function calculateMaster(silent = false) {
     // Get inputs
     const sde = parseFloat(document.getElementById('master-sde').value);
     const taxRate = parseFloat(document.getElementById('master-taxrate').value) / 100;
@@ -485,7 +485,7 @@ function calculateMaster() {
         return;
     }
 
-    if (ecaFee === 0) {
+    if (ecaFee === 0 && !silent) {
         alert('Please enter your ECA Annual Advisory Fee to calculate costs accurately.');
         // Allow calculation to continue with warning
     }
@@ -689,6 +689,16 @@ function renderChart(canvasId, data, title, isMultiScenario = false) {
 
 // Handle preset buttons for individual calculator inputs
 document.addEventListener('DOMContentLoaded', function() {
+    // Re-run the calculator that owns a given input, so preset selections
+    // update the displayed results immediately (no manual "Calculate" needed).
+    function recalcFor(inputId) {
+        if (!inputId) return;
+        if (inputId.startsWith('db-')) calculateDB();
+        else if (inputId.startsWith('b831-')) calculate831b();
+        else if (inputId.startsWith('serp-')) calculateSERP();
+        else if (inputId.startsWith('master-')) calculateMaster(true);
+    }
+
     // Preset buttons for EPIG return, tax rate, etc.
     document.querySelectorAll('.preset-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
@@ -700,6 +710,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Remove active class from siblings
                 this.parentElement.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
+                // Recalculate the owning calculator so results refresh live.
+                recalcFor(input.id);
             }
         });
     });
@@ -710,7 +722,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const preset = this.dataset.preset;
             const defaults = DENTIST_DEFAULTS[preset];
-            
+
             // Apply defaults
             document.getElementById('master-sde').value = defaults.sde;
             document.getElementById('master-taxrate').value = defaults.taxRate;
@@ -720,10 +732,13 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('master-db-contrib').value = defaults.dbContrib;
             document.getElementById('master-831b-premium').value = defaults.b831Premium;
             document.getElementById('master-serp-funding').value = defaults.serpFunding;
-            
+
             // Update active state
             this.parentElement.querySelectorAll('.preset-btn-large').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
+
+            // Recalculate immediately (silent: don't nag about the ECA fee here).
+            calculateMaster(true);
         });
     });
 
