@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { K, dbModel } from "../engine";
 import { usdShort, band } from "../lib/format";
-import { Illustrative } from "../components/Illustrative";
+import { DisclaimerBlock } from "../components/DisclaimerBlock";
 import { CalcShell, Slider, PillGroup, Result, ShowTheMath } from "../components/ui";
 
 const RATE_OPTS = [
@@ -39,7 +39,7 @@ export function DbAccelerator() {
         </>
       }
       outputs={
-        <Illustrative note="Contribution limits are set by IRS rules and actuarial determination.">
+        <DisclaimerBlock note="Contribution limits are set by IRS rules and actuarial determination.">
           <div className="result-grid">
             <Result label="Contribution range" value={band(r.contribLow, r.contribHigh)} tone="upside" />
             <Result label="Tax savings (yr 1)" value={band(r.taxSavingLow, r.taxSavingHigh)} tone="upside" />
@@ -66,7 +66,7 @@ export function DbAccelerator() {
               "State taxes and your specific circumstances.",
             ]}
           />
-        </Illustrative>
+        </DisclaimerBlock>
       }
     />
   );

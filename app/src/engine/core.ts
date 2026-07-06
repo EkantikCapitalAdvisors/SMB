@@ -174,7 +174,7 @@ export function multiplier(netValue: number, taxSaved: number): number {
 // DASH-1 vector (live: retention 325K, exit ~656K; vector: 225K, 350K, net
 // 2.92M, 5.1×). The pieces below that ARE pinned by other vectors (tax,
 // accumulation, retention, reserves) are exact; `exitUplift` is an interim
-// placeholder pending sign-off — see golden.test.ts (DASH-1 marked todo).
+// provisional pending sign-off — see golden.test.ts (DASH-1 marked todo).
 // ---------------------------------------------------------------------------
 export interface DashboardInputs {
   sde: number;
@@ -223,7 +223,7 @@ export function dashboardModel(i: DashboardInputs): DashboardResult {
     ? K.SERP.defComp * i.serpReplMult * K.SERP.defDepartReduction
     : 0;
 
-  // INTERIM exit-uplift placeholder — do not treat as final (see block comment).
+  // INTERIM exit-uplift stand-in — do not treat as final (see block comment).
   const incrementalSde = i.sde * i.reinvestEff * 0.1;
   const exitUplift = incrementalSde * i.exitMultiple * i.years * 0.5;
 

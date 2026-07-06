@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { K, dashboardModel } from "../engine";
 import { usdShort, mult } from "../lib/format";
-import { Illustrative } from "../components/Illustrative";
+import { DisclaimerBlock } from "../components/DisclaimerBlock";
 import { CalcShell, Slider, PillGroup, Result, Toggle, ShowTheMath } from "../components/ui";
 
 const RATE_OPTS = [
@@ -15,7 +15,15 @@ const EPIG_OPTS = [
   { value: K.EPIG.scenarios.strong, label: "12% strong" },
 ];
 
+// §4.6 — Duveen identity: let the visitor find themselves in the machine. One tap pre-fills.
+const PERSONAS = [
+  { key: "A", label: "Dr. A — 52, solo, $650K SDE", sde: 650_000, taxRate: 0.38, dbContrib: 180_000, serpFunding: 25_000 },
+  { key: "B", label: "Dr. B — 47, 4-op, $900K SDE", sde: 900_000, taxRate: 0.44, dbContrib: 220_000, serpFunding: 35_000 },
+  { key: "C", label: "Owner C — 55, $500K SDE", sde: 500_000, taxRate: 0.38, dbContrib: 150_000, serpFunding: 20_000 },
+];
+
 export function MasterDashboard() {
+  const [sde, setSde] = useState<number>(K.DEFAULT_SDE);
   const [taxRate, setTaxRate] = useState(0.38);
   const [epigReturn, setEpigReturn] = useState<number>(K.EPIG.scenarios.base);
   const [db, setDb] = useState(true);
@@ -25,11 +33,20 @@ export function MasterDashboard() {
   const [b831Premium, setB831Premium] = useState<number>(K.CAPTIVE.defPremium);
   const [serpFunding, setSerpFunding] = useState<number>(K.SERP.defFunding);
   const [ecaFee, setEcaFee] = useState(0); // required input; never defaulted (never imply a price)
+  const [persona, setPersona] = useState<string>("");
+
+  function applyPersona(p: (typeof PERSONAS)[number]) {
+    setPersona(p.key);
+    setSde(p.sde);
+    setTaxRate(p.taxRate);
+    setDbContrib(p.dbContrib);
+    setSerpFunding(p.serpFunding);
+  }
 
   const r = useMemo(
     () =>
       dashboardModel({
-        sde: K.DEFAULT_SDE,
+        sde,
         taxRate,
         years: 10,
         epigReturn,
@@ -46,7 +63,7 @@ export function MasterDashboard() {
         setupCosts: K.COSTS.defSetup,
         thirdPartyCosts: K.COSTS.defThirdParty,
       }),
-    [taxRate, epigReturn, db, b831, serp, dbContrib, b831Premium, serpFunding, ecaFee],
+    [sde, taxRate, epigReturn, db, b831, serp, dbContrib, b831Premium, serpFunding, ecaFee],
   );
 
   return (
@@ -55,6 +72,16 @@ export function MasterDashboard() {
       intro="Coordination is the product. Toggle the levers and watch tax savings compound into retirement, reserves, and exit value — one dollar of tax saved becomes several."
       inputs={
         <>
+          <div className="field">
+            <label>Start from a profile</label>
+            <div className="pillrow">
+              {PERSONAS.map((p) => (
+                <button key={p.key} type="button" className="pill" aria-pressed={persona === p.key} onClick={() => applyPersona(p)}>
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          </div>
           <PillGroup label="Effective tax rate" value={taxRate} options={RATE_OPTS} onChange={setTaxRate} />
           <PillGroup label="EPIG scenario" value={epigReturn} options={EPIG_OPTS} onChange={setEpigReturn} />
           <Toggle label="Defined Benefit plan" checked={db} onChange={setDb} />
@@ -67,7 +94,7 @@ export function MasterDashboard() {
         </>
       }
       outputs={
-        <Illustrative note="Depends on eligibility, plan design, IRS/DOL compliance, and market performance.">
+        <DisclaimerBlock note="Depends on eligibility, plan design, IRS/DOL compliance, and market performance.">
           {ecaFee === 0 && (
             <p className="legal" style={{ color: "var(--gold-500)", marginTop: 0 }}>
               Enter your ECA advisory fee to price net costs. It is quoted at the strategy session
@@ -95,7 +122,7 @@ export function MasterDashboard() {
             </div>
             <p className="legal" style={{ marginTop: "var(--space-3)" }}>
               The exit-uplift formula and the resulting net-value multiplier are pending sign-off
-              (spec DASH-1). Shown as an interim placeholder — not a published figure.
+              (spec DASH-1). Shown as an interim value — not a published figure.
             </p>
           </div>
 
@@ -119,7 +146,7 @@ export function MasterDashboard() {
               "Taxes on distribution and individual circumstances.",
             ]}
           />
-        </Illustrative>
+        </DisclaimerBlock>
       }
     />
   );

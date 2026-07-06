@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { K, captiveModel, type ClaimsLevel } from "../engine";
 import { usdShort } from "../lib/format";
-import { Illustrative } from "../components/Illustrative";
+import { DisclaimerBlock } from "../components/DisclaimerBlock";
 import { CalcShell, Slider, PillGroup, Result, ShowTheMath } from "../components/ui";
 
 const CLAIMS_OPTS = [
@@ -55,7 +55,7 @@ export function CaptiveReserve() {
         </>
       }
       outputs={
-        <Illustrative note="831(b) elections carry strict IRS requirements; deductibility is fact-specific.">
+        <DisclaimerBlock note="831(b) elections carry strict IRS requirements; deductibility is fact-specific.">
           <div className="result-grid">
             <Result label="Year-1 tax effect" value={usdShort(r.taxEffect)} tone="upside" />
             <Result label="Year-1 net reserve" value={usdShort(r.netReserve)} tone="data" />
@@ -81,7 +81,7 @@ export function CaptiveReserve() {
               "Investment losses in the reserve pool.",
             ]}
           />
-        </Illustrative>
+        </DisclaimerBlock>
       }
     />
   );

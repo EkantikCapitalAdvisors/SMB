@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { K, serpModel } from "../engine";
 import { usdShort, pct } from "../lib/format";
-import { Illustrative } from "../components/Illustrative";
+import { DisclaimerBlock } from "../components/DisclaimerBlock";
 import { CalcShell, Slider, PillGroup, Result, Toggle, ShowTheMath } from "../components/ui";
 
 const REPL_OPTS = K.SERP.replMult.map((m) => ({ value: m, label: `${m}×` }));
@@ -54,7 +54,7 @@ export function SerpRetention() {
           {leverageOn && (
             <>
               <Slider label="Borrowed capital" value={loan} min={50_000} max={500_000} step={10_000} format={usdShort} onChange={setLoan} />
-              <PillGroup label={`EPIG scenario (loan rate ${pct(K.SERP.loanRate * 100)})`} value={epigReturn} options={EPIG_OPTS} onChange={setEpigReturn} />
+              <PillGroup label={`Assumed EPIG return — illustrative (loan rate ${pct(K.SERP.loanRate * 100)})`} value={epigReturn} options={EPIG_OPTS} onChange={setEpigReturn} />
               <button
                 type="button"
                 className="btn btn--ghost"
@@ -68,7 +68,7 @@ export function SerpRetention() {
         </>
       }
       outputs={
-        <Illustrative note="SERPs are §409A non-qualified plans; policy-loan leverage involves risk, including lapse if unpaid.">
+        <DisclaimerBlock note="SERPs are §409A non-qualified plans; policy-loan leverage involves risk, including lapse if unpaid.">
           <div className="result-grid">
             <Result label="Cost of losing them" value={usdShort(r.costOfLoss)} tone="lost" />
             <Result label="SERP investment" value={usdShort(r.totalInvestment)} tone="data" />
@@ -111,7 +111,7 @@ export function SerpRetention() {
               "The scenario where the key employee departs anyway.",
             ]}
           />
-        </Illustrative>
+        </DisclaimerBlock>
       }
     />
   );
